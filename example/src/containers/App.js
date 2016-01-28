@@ -7,7 +7,7 @@ import HelloModal from './HelloModal'
 
 class App extends Component {
   handleClick = () => {
-    this.props.show('hello')
+    this.props.show('hello', { name: 'Ava' })
   };
 
   render() {
@@ -16,7 +16,7 @@ class App extends Component {
         <Button bsStyle="primary" onClick={this.handleClick}>Launch demo modal</Button>
         <HelloModal />
       </div>
-    );
+    )
   }
 }
 

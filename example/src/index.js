@@ -3,16 +3,23 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './containers/App'
 import createLogger from 'redux-logger'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducer'
+import DevTools from './containers/DevTools';
 
 const logger = createLogger()
-const createStoreWithMiddleware = applyMiddleware(logger)(createStore)
-const store = createStoreWithMiddleware(reducer)
+const finalCreateStore = compose(
+  applyMiddleware(logger),
+  DevTools.instrument()
+)(createStore)
+const store = finalCreateStore(reducer)
 
 render(
   <Provider store={store}>
-    <App />
+    <div>
+      <App />
+      <DevTools />
+    </div>
   </Provider>,
   document.getElementById('root')
 )

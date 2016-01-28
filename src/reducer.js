@@ -24,7 +24,7 @@ export default (state = initialState, action = {}) => {
         [action.payload.modal]: {
           show: false
         }
-      })
+      }, { deep: true })
     case DESTROY:
       return state.without(action.payload.modal)
     default:
