@@ -10,8 +10,6 @@ function getDisplayName(WrappedComponent) {
 
 export default name => {
   return WrappedComponent => {
-    const defaultModal = { show: false, params: {} }
-
     class ConnectModal extends Component {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
 
@@ -32,7 +30,9 @@ export default name => {
       };
 
       render() {
-        const modal = this.props.modal || defaultModal
+        const { modal } = this.props
+
+        if (!modal) { return null }
 
         return (
           <WrappedComponent modal={modal} handleHide={this.handleHide} />
