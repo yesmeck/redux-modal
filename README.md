@@ -12,8 +12,8 @@ npm install --save re-notif
 
 ## Documentation
 
-* [Example](/example)
 * [API](/docs/api.md)
+* [Example](/example)
 
 ## License
 

@@ -18,11 +18,11 @@ A React component class that injects modal state and `handleHide` action creator
 export default connectModal('myModal')(MyModal)
 ```
 
-It will pass the modal state and a 'handleHide' action creator as props to your modal component.
+It will pass the modal state and a `handleHide` action creator as props to your modal component.
 
 ## reducer
 
-The modal reducer. Should be given to mounted to your Redux state at modal.
+The modal reducer. Should be given to mounted to your Redux state at `modal`.
 
 ### Example
 
