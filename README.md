@@ -29,7 +29,7 @@ export default combineReducers({
 ```javascript
 import { Modal } from 'some-modal-compoent'
 
-class MyModal extens Component {
+class MyModal extends Component {
   render(
     const { modal: { show } } = this.props
 
