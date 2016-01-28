@@ -60,7 +60,7 @@ import { show as showModal } from 'redux-modal'
     ...bindActionCreators({ showModal }, dispatch)
   })
 )
-class App extens Component {
+class App extends Component {
   handleShow = () => {
     this.props.showModal('myModal')
   }
