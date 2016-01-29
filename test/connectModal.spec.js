@@ -36,11 +36,11 @@ describe('connectModal', () => {
 
   class MyModal extends Component {
     render() {
-      const { modal: { show, params } } = this.props
+      const { modal: { show } } = this.props
 
       return (
-        <Modal show />
-      );
+        <Modal show={show} />
+      )
     }
   }
 
@@ -51,7 +51,7 @@ describe('connectModal', () => {
     const reducer = combineReducers({ modal: modalReducer })
     const store = createStore(reducer)
 
-    const container = TestUtils.renderIntoDocument(
+    TestUtils.renderIntoDocument(
       <ProviderMock store={store}>
         <WrappedMyModal />
       </ProviderMock>
@@ -68,7 +68,7 @@ describe('connectModal', () => {
     const reducer = combineReducers({ modal: modalReducer })
     const store = createStore(reducer)
 
-    var container = document.createElement('div');
+    var container = document.createElement('div')
     ReactDOM.render(
       <ProviderMock store={store}>
         <WrappedMyModal />
