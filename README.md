@@ -9,7 +9,7 @@ Works with any React Modal Components.
 ## Installation
 
 ```
-npm install --save re-notif
+npm i --save redux-modal
 ```
 
 ## Documentation
