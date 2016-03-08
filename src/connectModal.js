@@ -8,7 +8,7 @@ function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component'
 }
 
-export default name => {
+export default function connectModal({ name, reslove }) {
   return WrappedComponent => {
     class ConnectModal extends Component {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
@@ -17,8 +17,36 @@ export default name => {
         modal: PropTypes.object
       };
 
+      static contextTypes = {
+        store: PropTypes.object.isRequired
+      };
+
+      constructor(props, context) {
+        super(props, context)
+
+        const { modal } = props
+
+        this.state = { show: modal && modal.show }
+      }
+
       componentWillMount() {
         this.props.init(name)
+      }
+
+      componentWillReceiveProps(nextProps) {
+        const { modal } = nextProps
+        const { store } = this.context
+        if (modal && modal.show) {
+          if (reslove) {
+            reslove({ store, params: modal.params }).then(() => {
+              this.setState({ show: true })
+            })
+          } else {
+            this.setState({ show: true })
+          }
+        } else {
+          this.setState({ show: false })
+        }
       }
 
       componentWillUnmount() {
@@ -30,9 +58,9 @@ export default name => {
       };
 
       render() {
-        const { modal } = this.props
+        if (!this.state.show) { return null }
 
-        if (!modal) { return null }
+        const { modal } = this.props
 
         return (
           <WrappedComponent modal={modal} handleHide={this.handleHide} />

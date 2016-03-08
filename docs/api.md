@@ -1,12 +1,14 @@
 # API
 
-## connectModal(name)
+## connectModal(config)
 
 Connect a modal component to redux store.
 
 ### Arguments
 
-* `name`(String): The modal name
+* `config`(Object)
+  * `name`(String)(Require) The modal name
+  * `resolve`(Function) Resolve your promise before modal show
 
 ### Returns
 

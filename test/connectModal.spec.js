@@ -3,7 +3,9 @@ import { mount } from 'enzyme'
 import React, { Children, Component, PropTypes } from 'react'
 import { createStore, combineReducers } from 'redux'
 import connectModal from '../src/connectModal'
+import reducer from '../src/reducer'
 import { INIT, HIDE, DESTROY } from '../src/actionTypes'
+import { show } from '../src/actions'
 
 describe('connectModal', () => {
   class ProviderMock extends Component {
@@ -43,12 +45,12 @@ describe('connectModal', () => {
     }
   }
 
-  const WrappedMyModal = connectModal('myModal')(MyModal)
+  let WrappedMyModal = connectModal({ name: 'myModal' })(MyModal)
 
   it('initialize modal state before mount', () => {
-    const modalReducer = createSpy().andReturn({})
-    const reducer = combineReducers({ modal: modalReducer })
-    const store = createStore(reducer)
+    const mockReducer = createSpy().andReturn({})
+    const finalReducer = combineReducers({ modal: mockReducer })
+    const store = createStore(finalReducer)
 
     mount(
       <ProviderMock store={store}>
@@ -56,7 +58,7 @@ describe('connectModal', () => {
       </ProviderMock>
     )
 
-    const calls = modalReducer.calls
+    const calls = mockReducer.calls
 
     expect(calls[calls.length - 1].arguments).toEqual([
       {},
@@ -65,9 +67,9 @@ describe('connectModal', () => {
   })
 
   it('destroy modal state before unmount', () => {
-    const modalReducer = createSpy().andReturn({})
-    const reducer = combineReducers({ modal: modalReducer })
-    const store = createStore(reducer)
+    const mockReducer = createSpy().andReturn({})
+    const finalReducer = combineReducers({ modal: mockReducer })
+    const store = createStore(finalReducer)
 
     const wrapper = mount(
       <ProviderMock store={store}>
@@ -77,7 +79,7 @@ describe('connectModal', () => {
 
     wrapper.unmount()
 
-    const calls = modalReducer.calls
+    const calls = mockReducer.calls
     expect(calls[calls.length - 1].arguments).toEqual([
       {},
       { type: DESTROY, payload: { modal: 'myModal' } }
@@ -85,11 +87,11 @@ describe('connectModal', () => {
   })
 
   it('pass modal state to the given component', () => {
-    const reducer = combineReducers({
+    const finalReducer = combineReducers({
       modal: () => ({ myModal: { show: true, params: {} } })
     })
 
-    const store = createStore(reducer)
+    const store = createStore(finalReducer)
 
     const wrapper = mount(
       <ProviderMock store={store}>
@@ -102,9 +104,9 @@ describe('connectModal', () => {
 
   it('pass handleHide to the given component', () => {
     const initialState = { myModal: { params: {}, show: true } }
-    const modalReducer = createSpy().andReturn(initialState)
-    const reducer = combineReducers({ modal: modalReducer })
-    const store = createStore(reducer)
+    const mockReducer = createSpy().andReturn(initialState)
+    const finalReducer = combineReducers({ modal: mockReducer })
+    const store = createStore(finalReducer)
 
     const wrapper = mount(
       <ProviderMock store={store}>
@@ -114,10 +116,30 @@ describe('connectModal', () => {
 
     wrapper.find(MyModal).props().handleHide()
 
-    const calls = modalReducer.calls
+    const calls = mockReducer.calls
     expect(calls[calls.length - 1].arguments).toEqual([
       initialState,
       { type: HIDE, payload: { modal: 'myModal' } }
     ])
+  })
+
+  it('reslove the promise before show', () => {
+    const finalReducer = combineReducers({ modal: reducer })
+    const store = createStore(finalReducer)
+    const apiCall = createSpy().andReturn(new Promise(resolve => resolve()))
+
+    WrappedMyModal = connectModal({
+      name: 'myModal',
+      reslove: apiCall
+    })(MyModal)
+
+    mount(
+      <ProviderMock store={store}>
+        <WrappedMyModal />
+      </ProviderMock>
+    )
+    const params = { hello: 'Ava' }
+    store.dispatch(show('myModal', params))
+    expect(apiCall.calls[0].arguments).toEqual([ { store, params } ])
   })
 })
