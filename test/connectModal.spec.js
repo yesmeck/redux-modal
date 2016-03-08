@@ -1,7 +1,6 @@
 import expect, { createSpy } from 'expect'
-import TestUtils from 'react-addons-test-utils'
+import { mount } from 'enzyme'
 import React, { Children, Component, PropTypes } from 'react'
-import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
 import connectModal from '../src/connectModal'
 import { INIT, HIDE, DESTROY } from '../src/actionTypes'
@@ -51,12 +50,14 @@ describe('connectModal', () => {
     const reducer = combineReducers({ modal: modalReducer })
     const store = createStore(reducer)
 
-    TestUtils.renderIntoDocument(
+    mount(
       <ProviderMock store={store}>
         <WrappedMyModal />
       </ProviderMock>
     )
+
     const calls = modalReducer.calls
+
     expect(calls[calls.length - 1].arguments).toEqual([
       {},
       { type: INIT, payload: { modal: 'myModal' } }
@@ -68,13 +69,13 @@ describe('connectModal', () => {
     const reducer = combineReducers({ modal: modalReducer })
     const store = createStore(reducer)
 
-    var container = document.createElement('div')
-    ReactDOM.render(
+    const wrapper = mount(
       <ProviderMock store={store}>
         <WrappedMyModal />
       </ProviderMock>
-    , container)
-    ReactDOM.unmountComponentAtNode(container)
+    )
+
+    wrapper.unmount()
 
     const calls = modalReducer.calls
     expect(calls[calls.length - 1].arguments).toEqual([
@@ -90,14 +91,13 @@ describe('connectModal', () => {
 
     const store = createStore(reducer)
 
-    const container = TestUtils.renderIntoDocument(
+    const wrapper = mount(
       <ProviderMock store={store}>
         <WrappedMyModal />
       </ProviderMock>
     )
-    const stub = TestUtils.findRenderedComponentWithType(container, MyModal)
 
-    expect(stub.props.modal).toEqual({ show: true, params: {} })
+    expect(wrapper.find(MyModal).props().modal).toEqual({ show: true, params: {} })
   })
 
   it('pass handleHide to the given component', () => {
@@ -106,13 +106,14 @@ describe('connectModal', () => {
     const reducer = combineReducers({ modal: modalReducer })
     const store = createStore(reducer)
 
-    const container = TestUtils.renderIntoDocument(
+    const wrapper = mount(
       <ProviderMock store={store}>
         <WrappedMyModal />
       </ProviderMock>
     )
-    const stub = TestUtils.findRenderedComponentWithType(container, MyModal)
-    stub.props.handleHide()
+
+    wrapper.find(MyModal).props().handleHide()
+
     const calls = modalReducer.calls
     expect(calls[calls.length - 1].arguments).toEqual([
       initialState,
