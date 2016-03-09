@@ -17,7 +17,7 @@ A React component class that injects modal state and `handleHide` action creator
 ### Example
 
 ```javascript
-export default connectModal('myModal')(MyModal)
+export default connectModal({ name: 'myModal' })(MyModal)
 ```
 
 It will pass the modal state and a `handleHide` action creator as props to your modal component.
