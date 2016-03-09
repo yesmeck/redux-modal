@@ -123,14 +123,14 @@ describe('connectModal', () => {
     ])
   })
 
-  it('reslove the promise before show', () => {
+  it('resolve the promise before show', () => {
     const finalReducer = combineReducers({ modal: reducer })
     const store = createStore(finalReducer)
     const apiCall = createSpy().andReturn(new Promise(resolve => resolve()))
 
     WrappedMyModal = connectModal({
       name: 'myModal',
-      reslove: apiCall
+      resolve: apiCall
     })(MyModal)
 
     mount(

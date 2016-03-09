@@ -36,7 +36,7 @@ class HelloModal extends Component {
 
 export default connectModal({
   name: 'hello',
-  reslove: () => {
+  resolve: () => {
     return new Promise((resolve) => {
       console.log('resloving async task')
       setTimeout(() => {

@@ -8,7 +8,7 @@ function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component'
 }
 
-export default function connectModal({ name, reslove }) {
+export default function connectModal({ name, resolve }) {
   return WrappedComponent => {
     class ConnectModal extends Component {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
@@ -37,8 +37,8 @@ export default function connectModal({ name, reslove }) {
         const { modal } = nextProps
         const { store } = this.context
         if (modal && modal.show) {
-          if (reslove) {
-            reslove({ store, params: modal.params }).then(() => {
+          if (resolve) {
+            resolve({ store, params: modal.params }).then(() => {
               this.setState({ show: true })
             })
           } else {
