@@ -142,4 +142,21 @@ describe('connectModal', () => {
     store.dispatch(show('myModal', params))
     expect(apiCall.calls[0].arguments).toEqual([ { store, params } ])
   })
+
+  it('should pass props to wrpped modal', () => {
+    const finalReducer = combineReducers({
+      modal: () => ({ myModal: { show: true, params: {} } })
+    })
+    const store = createStore(finalReducer)
+
+    WrappedMyModal = connectModal({ name: 'myModal' })(MyModal)
+
+    const wrapper = mount(
+      <ProviderMock store={store}>
+        <WrappedMyModal hello="ava" />
+      </ProviderMock>
+    )
+
+    expect(wrapper.find(MyModal).props().hello).toEqual('ava')
+  })
 })
