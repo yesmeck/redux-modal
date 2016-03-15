@@ -74,10 +74,8 @@ export default function connectModal({ name, resolve }) {
       render() {
         if (!this.state.show) { return null }
 
-        const { modal, ...passedProps } = this.props
-
         return (
-          <WrappedComponent {...passedProps} modal={modal} handleHide={this.handleHide} />
+          <WrappedComponent {...this.props} handleHide={this.handleHide} />
         )
       }
     }
