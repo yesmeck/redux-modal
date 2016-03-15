@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Redux modal example",
   "scripts": {
-    "start": "webpack-dev-server --devtool eval --progress --colors --content-base . --hot --inline"
+    "start": "webpack-dev-server --colors --content-base . --hot --inline"
   },
   "repository": {
     "type": "git",

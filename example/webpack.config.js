@@ -4,7 +4,7 @@ var webpack = require('webpack')
 var reduxModalSrc = path.resolve(__dirname, '../src')
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: './src/index.js',
   output: {
     path: '.',
