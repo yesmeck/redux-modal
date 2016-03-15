@@ -49,7 +49,7 @@ export default function connectModal({ name, resolve }) {
           this.show()
         }
         if (resolve) {
-          const resolveResult = resolve({ store, params: modal.params })
+          const resolveResult = resolve({ store, props: modal.props })
           if (!isPromise(resolveResult)) { return this.show() }
           resolveResult.then(() => {
             this.show()
@@ -78,8 +78,10 @@ export default function connectModal({ name, resolve }) {
 
         this.firstShow = false
 
+        const { modal, ...ownProps } = this.props
+
         return (
-          <WrappedComponent {...this.props} handleHide={this.handleHide} />
+          <WrappedComponent {...ownProps} {...modal.props} show={modal.show} handleHide={this.handleHide} />
         )
       }
     }

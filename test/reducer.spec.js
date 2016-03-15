@@ -14,18 +14,18 @@ describe('reducer', () => {
     expect(reducer(undefined, action)).toEqual({
       foo: {
         show: false,
-        params: {}
+        props: {}
       }
     })
   })
 
   it('handle SHOW', () => {
-    const action = { type: SHOW, payload: { modal: 'foo', params: { bar: 'bzz' } } }
+    const action = { type: SHOW, payload: { modal: 'foo', props: { bar: 'bzz' } } }
 
     expect(reducer(undefined, action)).toEqual({
       foo: {
         show: true,
-        params: {
+        props: {
           bar: 'bzz'
         }
       }
@@ -36,7 +36,7 @@ describe('reducer', () => {
     const prevState = Immutable({
       foo: {
         show: true,
-        params: {
+        props: {
           bar: 'bzz'
         }
       }
@@ -47,7 +47,7 @@ describe('reducer', () => {
     expect(reducer(prevState, action)).toEqual({
       foo: {
         show: false,
-        params: {
+        props: {
           bar: 'bzz'
         }
       }
@@ -58,7 +58,7 @@ describe('reducer', () => {
     const prevState = Immutable({
       foo: {
         show: true,
-        params: {
+        props: {
           bar: 'bzz'
         }
       }

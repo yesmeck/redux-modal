@@ -9,14 +9,14 @@ export default (state = initialState, action = {}) => {
       return state.merge({
         [action.payload.modal]: {
           show: false,
-          params: {}
+          props: {}
         }
       })
     case SHOW:
       return state.merge({
         [action.payload.modal]: {
           show: true,
-          params: action.payload.params
+          props: action.payload.props
         }
       })
     case HIDE:

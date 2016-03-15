@@ -9,12 +9,12 @@ export function init(modal) {
   }
 }
 
-export function show(modal, params = {}) {
+export function show(modal, props = {}) {
   return {
     type: SHOW,
     payload: {
       modal,
-      params
+      props
     }
   }
 }

@@ -4,7 +4,7 @@ import { connectModal } from 'redux-modal'
 
 class HelloModal extends Component {
   static propTypes = {
-    modal: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
     handleHide: PropTypes.func.isRequired
   };
 
@@ -13,7 +13,7 @@ class HelloModal extends Component {
   };
 
   render() {
-    const { modal: { show, params } } = this.props
+    const { show, name } = this.props
 
     return (
       <Modal show={show}>
@@ -22,7 +22,7 @@ class HelloModal extends Component {
         </Modal.Header>
 
         <Modal.Body>
-          { params.name }
+          { name }
         </Modal.Body>
 
         <Modal.Footer>
