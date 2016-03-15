@@ -3,7 +3,11 @@ export function getDisplayName(WrappedComponent) {
 }
 
 export function isPromise(thing) {
-  return typeof thing.then === 'function'
+  try {
+    return typeof thing.then === 'function'
+  } catch (e) {
+    return false
+  }
 }
 
 export function isUndefined(thing) {
