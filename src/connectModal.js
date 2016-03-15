@@ -12,13 +12,15 @@ function isPromise(thing) {
   return 'function' === typeof thing.then
 }
 
+const initialModalState = { show: false, props: {} }
+
 export default function connectModal({ name, resolve }) {
   return WrappedComponent => {
     class ConnectModal extends Component {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
 
       static propTypes = {
-        modal: PropTypes.object
+        modal: PropTypes.object.isRequired
       };
 
       static contextTypes = {
@@ -42,7 +44,7 @@ export default function connectModal({ name, resolve }) {
       componentWillReceiveProps(nextProps) {
         const { modal } = nextProps
         const { store } = this.context
-        if (!modal || !modal.show) {
+        if (!modal.show) {
           return this.hide()
         }
         if (!resolve) {
@@ -54,6 +56,12 @@ export default function connectModal({ name, resolve }) {
           resolveResult.then(() => {
             this.show()
           })
+        }
+      }
+
+      componentDidUpdate(prevProps, prevState) {
+        if (prevProps.modal.show && !this.props.modal.show) {
+          this.props.destroy(name)
         }
       }
 
@@ -90,7 +98,7 @@ export default function connectModal({ name, resolve }) {
 
     return connect(
       state => ({
-        modal: state.modal[name]
+        modal: state.modal[name] || initialModalState
       }),
       dispatch => ({ ...bindActionCreators({ init, hide, destroy }, dispatch) })
     )(hoistStatics(ConnectModal, WrappedComponent))
