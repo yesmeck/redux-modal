@@ -2,17 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import hoistStatics from 'hoist-non-react-statics'
-import { init, hide, destroy } from './actions'
+import { hide, destroy } from './actions'
+import { getDisplayName, isPromise, isUndefined } from './utils'
 
-function getDisplayName(WrappedComponent) {
-  return WrappedComponent.displayName || WrappedComponent.name || 'Component'
-}
-
-function isPromise(thing) {
-  return 'function' === typeof thing.then
-}
-
-const initialModalState = { show: false, props: {} }
+const INITIAL_MODAL_STATE = {}
 
 export default function connectModal({ name, resolve }) {
   return WrappedComponent => {
@@ -30,26 +23,27 @@ export default function connectModal({ name, resolve }) {
       constructor(props, context) {
         super(props, context)
 
-        const { modal } = props
+        const { modal: { show } } = props
 
-        this.firstShow = true
-
-        this.state = { show: modal && modal.show }
-      }
-
-      componentWillMount() {
-        this.props.init(name)
+        this.state = { show }
       }
 
       componentWillReceiveProps(nextProps) {
         const { modal } = nextProps
         const { store } = this.context
+
+        if (isUndefined(modal.show)) {
+          return this.unmount()
+        }
+
         if (!modal.show) {
           return this.hide()
         }
+
         if (!resolve) {
           this.show()
         }
+
         if (resolve) {
           const resolveResult = resolve({ store, props: modal.props })
           if (!isPromise(resolveResult)) { return this.show() }
@@ -59,7 +53,7 @@ export default function connectModal({ name, resolve }) {
         }
       }
 
-      componentDidUpdate(prevProps, prevState) {
+      componentDidUpdate(prevProps) {
         if (prevProps.modal.show && !this.props.modal.show) {
           this.props.destroy(name)
         }
@@ -77,30 +71,36 @@ export default function connectModal({ name, resolve }) {
         this.setState({ show: false })
       }
 
+      unmount() {
+        this.setState({ show: undefined })
+      }
+
       handleHide = () => {
         this.props.hide(name)
       };
 
       render() {
         const { show } = this.state
-
-        if (!show && this.firstShow) { return null }
-
-        this.firstShow = false
-
         const { modal, ...ownProps } = this.props
 
+        if (isUndefined(show)) { return null }
+
         return (
-          <WrappedComponent {...ownProps} {...modal.props} show={show} handleHide={this.handleHide} />
+          <WrappedComponent
+            {...ownProps}
+            {...modal.props}
+            show={show}
+            handleHide={this.handleHide}
+          />
         )
       }
     }
 
     return connect(
       state => ({
-        modal: state.modal[name] || initialModalState
+        modal: state.modal[name] || INITIAL_MODAL_STATE
       }),
-      dispatch => ({ ...bindActionCreators({ init, hide, destroy }, dispatch) })
+      dispatch => ({ ...bindActionCreators({ hide, destroy }, dispatch) })
     )(hoistStatics(ConnectModal, WrappedComponent))
   }
 }

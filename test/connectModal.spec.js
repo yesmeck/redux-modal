@@ -4,7 +4,7 @@ import React, { Children, Component, PropTypes } from 'react'
 import { createStore, combineReducers } from 'redux'
 import connectModal from '../src/connectModal'
 import reducer from '../src/reducer'
-import { init, show, hide, destroy } from '../src/actions'
+import { show, hide, destroy } from '../src/actions'
 
 describe('connectModal', () => {
   class ProviderMock extends Component {
@@ -46,23 +46,50 @@ describe('connectModal', () => {
 
   let WrappedMyModal = connectModal({ name: 'myModal' })(MyModal)
 
-  it('initialize modal state before mount', () => {
-    const mockReducer = createSpy().andReturn({})
-    const finalReducer = combineReducers({ modal: mockReducer })
+  it('render null at first mount', () => {
+    const finalReducer = () => ({ modal: { } })
     const store = createStore(finalReducer)
 
-    mount(
+    const wrapper = mount(
       <ProviderMock store={store}>
         <WrappedMyModal />
       </ProviderMock>
     )
 
-    const calls = mockReducer.calls
+    expect(wrapper.html()).toEqual(null)
+  })
 
-    expect(calls[calls.length - 1].arguments).toEqual([
-      {},
-      init('myModal')
-    ])
+  it('mount modal after dispatch show action', () => {
+    const finalReducer = combineReducers({ modal: reducer })
+    const store = createStore(finalReducer)
+
+    const wrapper = mount(
+      <ProviderMock store={store}>
+        <WrappedMyModal />
+      </ProviderMock>
+    )
+
+    expect(wrapper.html()).toEqual(null)
+
+    store.dispatch(show('myModal'))
+
+    expect(wrapper.find(MyModal).length).toEqual(1)
+  })
+
+  it('destroy after dispatch hide action', () => {
+    const finalReducer = combineReducers({ modal: reducer })
+    const store = createStore(finalReducer)
+
+    const wrapper = mount(
+      <ProviderMock store={store}>
+        <WrappedMyModal />
+      </ProviderMock>
+    )
+
+    store.dispatch(show('myModal'))
+    store.dispatch(hide('myModal'))
+
+    expect(wrapper.html()).toEqual(null)
   })
 
   it('destroy modal state before unmount', () => {

@@ -1,22 +1,11 @@
 import expect from 'expect'
 import Immutable from 'seamless-immutable'
-import { INIT, SHOW, HIDE, DESTROY } from '../src/actionTypes'
+import { SHOW, HIDE, DESTROY } from '../src/actionTypes'
 import reducer from '../src/reducer'
 
 describe('reducer', () => {
   it('return the initial state', () => {
     expect(reducer()).toEqual({})
-  })
-
-  it('handle INIT', () => {
-    const action = { type: INIT, payload: { modal: 'foo' } }
-
-    expect(reducer(undefined, action)).toEqual({
-      foo: {
-        show: false,
-        props: {}
-      }
-    })
   })
 
   it('handle SHOW', () => {

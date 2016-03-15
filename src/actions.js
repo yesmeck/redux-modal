@@ -1,13 +1,4 @@
-import { INIT, SHOW, HIDE, DESTROY } from './actionTypes'
-
-export function init(modal) {
-  return {
-    type: INIT,
-    payload: {
-      modal
-    }
-  }
-}
+import { SHOW, HIDE, DESTROY } from './actionTypes'
 
 export function show(modal, props = {}) {
   return {
