@@ -53,12 +53,6 @@ export default function connectModal({ name, resolve }) {
         }
       }
 
-      componentDidUpdate(prevProps) {
-        if (prevProps.modal.show && !this.props.modal.show) {
-          this.props.destroy(name)
-        }
-      }
-
       componentWillUnmount() {
         this.props.destroy(name)
       }
