@@ -8,7 +8,7 @@ Connect a modal component to redux store.
 
 * `config`(Object)
   * `name`(String)(Require) The modal name.
-  * `resolve`(Function) Things you want resolve before show your modal, if return a promise, the modal will show after the promise resolved.
+  * `resolve`(Function) Things you want to resolve before show your modal, if return a promise, the modal will show after the promise resolved.
   * `destroyOnHide`(Bool) Weather destroy the modal state and umount the modal after hide.
 
 ### Returns
