@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/yesmeck/redux-modal.svg?branch=master)](https://travis-ci.org/yesmeck/redux-modal)
 
-Redux based modal.
+`redux-modal` connect your modal to the redux store, and let you control your modal by simply dispatching actions.
 
-Works with any React Modal Components.
+It should works with any React based modal component.
 
 ## Installation
 
