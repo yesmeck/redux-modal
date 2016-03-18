@@ -9,6 +9,7 @@ Connect a modal component to redux store.
 * `config`(Object)
   * `name`(String)(Require) The modal name
   * `resolve`(Function) Resolve your promise before modal show
+  * `destroyOnHide`(Bool) Weather destroy the modal state and umount the modal after hide
 
 ### Returns
 
@@ -33,14 +34,24 @@ import { combineReducers } from 'redux'
 import { reducer as modal } from 'redux-modal'
 
 export default combineReducers({
+  ...yourOtherReducers,
   modal
 })
 ```
 
-## show(name)
+## show(name, props)
 
 The show modal action creator.
+
+### Arguments
+
+* `name`(String) The name of modal to show
+* `props`(Object) Props pass to your modal
 
 ## hide(name)
 
 The hide modal action creator.
+
+### Arguments
+
+* `name`(String) The name of modal to hide
