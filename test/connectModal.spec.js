@@ -76,6 +76,23 @@ describe('connectModal', () => {
     expect(wrapper.find(MyModal).length).toEqual(1)
   })
 
+  it('destroy after dispatch hide action if destroyOnHide is true', () => {
+    const finalReducer = combineReducers({ modal: reducer })
+    const store = createStore(finalReducer)
+    WrappedMyModal = connectModal({ name: 'myModal', destroyOnHide: true })(MyModal)
+
+    const wrapper = mount(
+      <ProviderMock store={store}>
+        <WrappedMyModal />
+      </ProviderMock>
+    )
+
+    store.dispatch(show('myModal'))
+    store.dispatch(hide('myModal'))
+
+    expect(wrapper.html()).toEqual(null)
+  })
+
   it('destroy modal state before unmount', () => {
     const mockReducer = createSpy().andReturn({})
     const finalReducer = combineReducers({ modal: mockReducer })

@@ -7,7 +7,7 @@ import { getDisplayName, isPromise, isUndefined } from './utils'
 
 const INITIAL_MODAL_STATE = {}
 
-export default function connectModal({ name, resolve }) {
+export default function connectModal({ name, resolve, destroyOnHide = false }) {
   return WrappedComponent => {
     class ConnectModal extends Component {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
@@ -50,6 +50,12 @@ export default function connectModal({ name, resolve }) {
           resolveResult.then(() => {
             this.show()
           })
+        }
+      }
+
+      componentDidUpdate(prevProps) {
+        if (prevProps.modal.show && !this.props.modal.show && destroyOnHide) {
+          this.props.destroy(name)
         }
       }
 
