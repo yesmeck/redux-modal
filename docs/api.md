@@ -7,9 +7,9 @@ Connect a modal component to redux store.
 ### Arguments
 
 * `config`(Object)
-  * `name`(String)(Require) The modal name
-  * `resolve`(Function) Resolve your promise before modal show
-  * `destroyOnHide`(Bool) Weather destroy the modal state and umount the modal after hide
+  * `name`(String)(Require) The modal name.
+  * `resolve`(Function) Things you want resolve before show your modal, if return a promise, the modal will show after the promise resolved.
+  * `destroyOnHide`(Bool) Weather destroy the modal state and umount the modal after hide.
 
 ### Returns
 
@@ -45,8 +45,8 @@ The show modal action creator.
 
 ### Arguments
 
-* `name`(String) The name of modal to show
-* `props`(Object) Props pass to your modal
+* `name`(String) The name of modal to show.
+* `props`(Object) Props pass to your modal.
 
 ## hide(name)
 
@@ -54,4 +54,4 @@ The hide modal action creator.
 
 ### Arguments
 
-* `name`(String) The name of modal to hide
+* `name`(String) The name of modal to hide.
