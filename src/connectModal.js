@@ -37,7 +37,7 @@ export default function connectModal({ name, resolve, destroyOnHide = false }) {
         }
 
         if (!modal.show) {
-          return this.hide()
+          return destroyOnHide ? this.props.destroy(name) : this.hide()
         }
 
         if (!resolve) {
@@ -50,12 +50,6 @@ export default function connectModal({ name, resolve, destroyOnHide = false }) {
           resolveResult.then(() => {
             this.show()
           })
-        }
-      }
-
-      componentDidUpdate(prevProps) {
-        if (prevProps.modal.show && !this.props.modal.show && destroyOnHide) {
-          this.props.destroy(name)
         }
       }
 

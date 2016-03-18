@@ -14,6 +14,7 @@
     "url": "https://github.com/yesmeck/redux-modal/issues"
   },
   "dependencies": {
+    "antd": "^0.12.12",
     "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.6"
   },

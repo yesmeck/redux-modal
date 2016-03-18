@@ -3,18 +3,27 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { show } from 'redux-modal'
 import { Button } from 'react-bootstrap'
-import HelloModal from './HelloModal'
+import BootstrapModal from './BootstrapModal'
+import { Button as AntdButton } from 'antd'
+import AntdModal from './AntdModal'
 
 class App extends Component {
-  handleClick = () => {
-    this.props.show('hello', { name: 'Ava' })
+  handleOpen = name => () => {
+    this.props.show(name, { message: `This is a ${name} modal` })
   };
 
   render() {
     return (
       <div>
-        <Button bsStyle="primary" onClick={this.handleClick}>Launch demo modal</Button>
-        <HelloModal />
+        <p>
+          <Button bsStyle="primary" onClick={this.handleOpen('bootstrap')}>Launch bootstrap modal</Button>
+          <BootstrapModal />
+        </p>
+        <br />
+        <p>
+          <AntdButton type="primary" onClick={this.handleOpen('antd')}>Launch antd modal</AntdButton>
+          <AntdModal />
+        </p>
       </div>
     )
   }
