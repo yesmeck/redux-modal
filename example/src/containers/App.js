@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 import BootstrapModal from './BootstrapModal'
 import { Button as AntdButton } from 'antd'
 import AntdModal from './AntdModal'
-import hocModal from './hocModal'
+import HOCModal from './HOCModal'
 
 class App extends Component {
   handleOpen = name => () => {
@@ -14,8 +14,6 @@ class App extends Component {
   };
 
   render() {
-    const HOCModal = hocModal('hoc')
-
     return (
       <div>
         <p>
@@ -30,7 +28,7 @@ class App extends Component {
         <br />
         <p>
           <Button bsStyle="primary" onClick={this.handleOpen('hoc')}>Launch hoc modal</Button>
-          <HOCModal />
+          <HOCModal name="hoc" />
         </p>
       </div>
     )
