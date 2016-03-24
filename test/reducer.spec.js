@@ -1,5 +1,4 @@
 import expect from 'expect'
-import Immutable from 'seamless-immutable'
 import { SHOW, HIDE, DESTROY } from '../src/actionTypes'
 import reducer from '../src/reducer'
 
@@ -22,14 +21,14 @@ describe('reducer', () => {
   })
 
   it('handle HIDE', () => {
-    const prevState = Immutable({
+    const prevState = {
       foo: {
         show: true,
         props: {
           bar: 'bzz'
         }
       }
-    })
+    }
 
     const action = { type: HIDE, payload: { modal: 'foo' } }
 
@@ -44,17 +43,17 @@ describe('reducer', () => {
   })
 
   it('handle DESTROY', () => {
-    const prevState = Immutable({
+    const prevState = {
       foo: {
         show: true,
         props: {
           bar: 'bzz'
         }
       }
-    })
+    }
 
     const action = { type: DESTROY, payload: { modal: 'foo' } }
 
-    expect(reducer(prevState, action)).toEqual({})
+    expect(reducer(prevState, action)).toEqual({ foo: undefined })
   })
 })

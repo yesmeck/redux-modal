@@ -1,25 +1,30 @@
-import Immutable from 'seamless-immutable'
 import { SHOW, HIDE, DESTROY } from './actionTypes'
 
-const initialState = Immutable({})
+const initialState = {}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case SHOW:
-      return state.merge({
+      return {
+        ...state,
         [action.payload.modal]: {
           show: true,
           props: action.payload.props
         }
-      })
+      }
     case HIDE:
-      return state.merge({
+      return {
+        ...state,
         [action.payload.modal]: {
+          ...state[action.payload.modal],
           show: false
         }
-      }, { deep: true })
+      }
     case DESTROY:
-      return state.without(action.payload.modal)
+      return {
+        ...state,
+        [action.payload.modal]: undefined
+      }
     default:
       return state
   }
