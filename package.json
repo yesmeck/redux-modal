@@ -60,7 +60,7 @@
     "hoist-non-react-statics": "^1.0.3"
   },
   "peerDependencies": {
-    "react": "^0.14.0",
+    "react": "^0.14.0 || ^15.0.0",
     "react-redux": "^4.0.0",
     "redux": "^3.0.0"
   }
