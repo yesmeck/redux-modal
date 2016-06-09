@@ -7,7 +7,7 @@ import { getDisplayName, isPromise, isUndefined } from './utils'
 
 const INITIAL_MODAL_STATE = {}
 
-export default function connectModal({ name, resolve, destroyOnHide = false }) {
+export default function connectModal({ name, resolve, destroyOnHide = true }) {
   return WrappedComponent => {
     class ConnectModal extends Component {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
