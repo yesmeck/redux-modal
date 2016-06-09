@@ -22,6 +22,10 @@ module.exports = {
         exclude: /node_modules/,
         include: [ __dirname, reduxModalSrc ],
         loader: 'babel'
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style', 'css']
       }
     ]
   },
