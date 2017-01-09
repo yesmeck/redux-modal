@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 import BootstrapModal from './BootstrapModal'
 import { Button as AntdButton } from 'antd'
 import AntdModal from './AntdModal'
-import HOCModal from './HOCModal'
+import DynamicModal from './DynamicModal'
 
 class App extends Component {
   handleOpen = name => () => {
@@ -27,8 +27,8 @@ class App extends Component {
         </p>
         <br />
         <p>
-          <Button bsStyle="primary" onClick={this.handleOpen('hoc')}>Launch hoc modal</Button>
-          <HOCModal name="hoc" />
+          <Button bsStyle="primary" onClick={this.handleOpen('dynamic')}>Launch dynamic modal</Button>
+          <DynamicModal name="dynamic" />
         </p>
       </div>
     )

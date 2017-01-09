@@ -30,7 +30,7 @@ class MyModal extends Component {
   }
 }
 
-export default class HOCModal extends Component {
+export default class DynamicModal extends Component {
   render() {
     const { name } = this.props
     const WrappedMyModal = connectModal({ name })(MyModal)
