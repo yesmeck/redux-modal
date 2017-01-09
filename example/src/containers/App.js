@@ -37,8 +37,6 @@ class App extends Component {
 
 export default connect(
   null,
-  dispatch => ({
-    ...bindActionCreators({ show }, dispatch)
-  })
+  dispatch => bindActionCreators({ show }, dispatch)
 )(App)
 
