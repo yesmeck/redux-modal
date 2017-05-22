@@ -75,7 +75,7 @@ export default function connectModal({ name, resolve, destroyOnHide = true }) {
 
       render() {
         const { show } = this.state
-        const { modal, ...ownProps } = this.props
+        const { modal, hide, destroy, ...ownProps } = this.props
 
         if (isUndefined(show)) { return null }
 
