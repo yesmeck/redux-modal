@@ -72,6 +72,10 @@ export default function connectModal({ name, resolve, destroyOnHide = true }) {
       handleHide = () => {
         this.props.hide(name)
       };
+    
+      handleDestroy = () => {
+        this.props.destroy(name)
+      };
 
       render() {
         const { show } = this.state
@@ -85,6 +89,7 @@ export default function connectModal({ name, resolve, destroyOnHide = true }) {
             {...modal.props}
             show={show}
             handleHide={this.handleHide}
+            handleDestroy={this.handleDestroy}
           />
         )
       }
