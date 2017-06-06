@@ -57,7 +57,8 @@
     "rimraf": "^2.5.0"
   },
   "dependencies": {
-    "hoist-non-react-statics": "^1.0.3"
+    "hoist-non-react-statics": "^1.0.3",
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0",
