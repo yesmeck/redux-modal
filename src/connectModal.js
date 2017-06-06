@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import hoistStatics from 'hoist-non-react-statics'
@@ -72,7 +73,7 @@ export default function connectModal({ name, resolve, destroyOnHide = true }) {
       handleHide = () => {
         this.props.hide(name)
       };
-    
+
       handleDestroy = () => {
         this.props.destroy(name)
       };

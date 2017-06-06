@@ -1,6 +1,7 @@
 import expect, { createSpy } from 'expect'
 import { mount } from 'enzyme'
-import React, { Children, Component, PropTypes } from 'react'
+import React, { Children, Component } from 'react'
+import PropTypes from 'prop-types'
 import { createStore, combineReducers } from 'redux'
 import connectModal from '../src/connectModal'
 import reducer from '../src/reducer'
