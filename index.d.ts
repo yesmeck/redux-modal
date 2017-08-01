@@ -1,16 +1,40 @@
 declare module "redux-modal" {
   import { Component } from "React";
 
+  /**
+   * Signature for modal action
+   */
   interface IModalAction {
+    /**
+     * Redux type property
+     */
     type: string;
+    /**
+     * Payload to update state
+     */
     payload: {
+      /**
+       * Modal component
+       */
       modal: any
     };
   }
 
+  /**
+   * Signature for the show modal actionj
+   */
   interface IShowAction extends IModalAction {
+    /**
+     * Payload to update state
+     */
     payload: {
+      /**
+       * Modal component
+       */
       modal: any,
+      /**
+       * Props to pass to component
+       */
       props: any
     };
   }
