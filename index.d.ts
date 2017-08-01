@@ -21,7 +21,7 @@ declare module "redux-modal" {
   }
 
   /**
-   * Signature for the show modal actionj
+   * Signature for the show modal action
    */
   interface IShowAction extends IModalAction {
     /**
@@ -41,25 +41,25 @@ declare module "redux-modal" {
 
   /**
    * The show modal action creator
-   * @param {any} modal The name of modal to show
+   * @param {string} modal The name of modal to show
    * @param {any} props Props pass to your modal
    * @return {IShowAction}
    */
-  function show(modal: any, props: any): IShowAction;
+  function show(modal: string, props: any): IShowAction;
 
   /**
    * The hide modal action creator
-   * @param {any} modal The name of the modal to hide
+   * @param {string} modal The name of the modal to hide
    * @return {IShowAction}
    */
-  function hide(modal: any):IShowAction;
+  function hide(modal: string):IShowAction;
 
   /**
    * Removes a modal from state
-   * @param modal Disposes the modal
+   * @param {string} modal The name of the modal to delete
    * @return {IShowAction}
    */
-  function destroy(modal: any):IShowAction;
+  function destroy(modal: string):IShowAction;
 
   /**
    * The modal reducer. Should be given to mounted to your Redux state at modal
@@ -77,7 +77,7 @@ declare module "redux-modal" {
    * @param {boolean} destroyOnHide Weather destroy the modal state and umount 
    * the modal after hide, default is true
    * @return {Component} A React component class that injects modal state and
-   * handleHide action creator into your modal componen
+   * handleHide action creator into your modal component
    */
   function connectModal(name: string, resolve: () => any, destroyOnHide: boolean): Component
 }
