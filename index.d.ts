@@ -14,9 +14,9 @@ declare module "redux-modal" {
      */
     payload: {
       /**
-       * Modal component
+       * The name of the modal
        */
-      modal: any
+      modal: string
     };
   }
 
@@ -29,9 +29,9 @@ declare module "redux-modal" {
      */
     payload: {
       /**
-       * Modal component
+       * The name of the modal
        */
-      modal: any,
+      modal: string,
       /**
        * Props to pass to component
        */
@@ -40,16 +40,16 @@ declare module "redux-modal" {
   }
 
   /**
-   * Shows a modal
-   * @param {any} modal Modal component
-   * @param {any} props React props to pass to the modal component
+   * The show modal action creator
+   * @param {any} modal The name of modal to show
+   * @param {any} props Props pass to your modal
    * @return {IShowAction}
    */
   function show(modal: any, props: any): IShowAction;
 
   /**
-   * Hides a modal from view
-   * @param {any} modal Modal component
+   * The hide modal action creator
+   * @param {any} modal The name of the modal to hide
    * @return {IShowAction}
    */
   function hide(modal: any):IShowAction;
@@ -62,7 +62,7 @@ declare module "redux-modal" {
   function destroy(modal: any):IShowAction;
 
   /**
-   * Updates the state with a new one
+   * The modal reducer. Should be given to mounted to your Redux state at modal
    * @param {any} state Previous state
    * @param {IShowAction} action Action describing changes in the modal state
    * @return {any} The new state
@@ -70,12 +70,14 @@ declare module "redux-modal" {
   function reducer(state: any, action: IShowAction):any;
 
   /**
-   * Wraps a modal component inside connect call
+   * Connect a modal component to redux store
    * @param {string} name The name of the modal
-   * @param {function} resolve Resolver function
-   * @param {boolean} destroyOnHide Boolean flag to indicate whether or not to destroy the
-   * modal dialog on hide
-   * @return {Component} React component HOC containing modal
+   * @param {function} resolve Things you want to resolve before show your modal, 
+   * if return a promise, the modal will show after the promise resolved
+   * @param {boolean} destroyOnHide Weather destroy the modal state and umount 
+   * the modal after hide, default is true
+   * @return {Component} A React component class that injects modal state and
+   * handleHide action creator into your modal componen
    */
   function connectModal(name: string, resolve: () => any, destroyOnHide: boolean): Component
 }
