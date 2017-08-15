@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/yesmeck/redux-modal#readme",
   "devDependencies": {
+    "@types/react": "^15.6.0",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.3.26",
     "babel-eslint": "^5.0.0-beta6",
@@ -58,7 +59,6 @@
     "rimraf": "^2.5.0"
   },
   "dependencies": {
-    "@types/react": "^15.6.0",
     "hoist-non-react-statics": "^1.0.3",
     "prop-types": "^15.5.10"
   },
