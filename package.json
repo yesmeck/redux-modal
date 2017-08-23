@@ -1,13 +1,14 @@
 {
   "name": "redux-modal",
-  "version": "1.4.1",
+  "version": "1.5.2",
   "description": "Redux based modal",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "files": [
     "dist",
     "lib",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "scripts": {
     "clean": "rimraf lib",
@@ -34,7 +35,11 @@
   },
   "homepage": "https://github.com/yesmeck/redux-modal#readme",
   "devDependencies": {
+<<<<<<< HEAD
     "@types/react": "^16.0.4",
+=======
+    "@types/react": "^15.6.0",
+>>>>>>> b011bdd40e349dd5a08721f1c3729eb638f91e74
     "babel-cli": "^6.4.5",
     "babel-core": "^6.3.26",
     "babel-eslint": "^5.0.0-beta6",
