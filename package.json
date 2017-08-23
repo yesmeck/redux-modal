@@ -4,7 +4,7 @@
   "description": "Redux based modal",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
-  "types": "index.d.ts",
+  "types": "./index.d.ts",
   "files": [
     "dist",
     "lib",
@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/yesmeck/redux-modal#readme",
   "devDependencies": {
-    "@types/react": "^15.6.0",
+    "@types/react": "^16.0.4",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.3.26",
     "babel-eslint": "^5.0.0-beta6",
@@ -45,7 +45,7 @@
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-0": "^6.1.18",
     "babel-register": "^6.3.13",
-    "enzyme": "^2.1.0",
+    "enzyme": "^2.9.1",
     "eslint": "^1.10.3",
     "eslint-config-rackt": "^1.1.1",
     "eslint-plugin-react": "^3.16.1",
@@ -57,7 +57,9 @@
     "react-dom": "^0.14.7",
     "react-redux": "^4.1.1",
     "redux": "^3.1.2",
-    "rimraf": "^2.5.0"
+    "rimraf": "^2.5.0",
+    "typescript": "^2.4.2",
+    "typescript-definition-tester": "^0.0.5"
   },
   "dependencies": {
     "hoist-non-react-statics": "^1.0.3",
