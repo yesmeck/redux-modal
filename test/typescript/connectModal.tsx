@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { connectModal, IModalConfig } from '../../index';
+import { connectModal } from '../../index';
 
 interface IDialogProps {
   handleHide: () => void;
@@ -12,7 +12,7 @@ const Dialog: React.SFC<IDialogProps> = ({ title }) => (
 );
 
 
-const WrappedDialog = ({ name }: IModalConfig) => {
+const WrappedDialog = (name: string) => {
   const OuterDialog = connectModal({ name })(Dialog);
   return <OuterDialog />;
 }

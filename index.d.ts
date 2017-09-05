@@ -7,7 +7,7 @@ type StatelessComponent<T> = React.StatelessComponent<T>;
 /**
  * Signature for modal configuration
  */
-export interface IModalConfig {
+interface IModalConfig {
   /**
    * The name of the modal
    * @param {string} name
@@ -101,14 +101,14 @@ export function reducer(state: any, action: IShowAction): any;
 export interface IModalInjectedProps {
   /**
    * Boolean flag indicating whether the modal is showing or not
-   * 
+   *
    * @type {boolean}
    * @memberof IModalInjectedProps
    */
   show: boolean;
   /**
    * Function that hides the component when called
-   * 
+   *
    * @memberof IModalInjectedProps
    */
   handleHide: () => void;
