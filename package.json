@@ -1,6 +1,6 @@
 {
   "name": "redux-modal",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Redux based modal",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
