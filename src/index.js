@@ -1,3 +1,3 @@
-export * from './actions'
-export reducer from './reducer'
-export connectModal from './connectModal'
+export * from "./actions";
+export reducer from "./reducer";
+export connectModal from "./connectModal";

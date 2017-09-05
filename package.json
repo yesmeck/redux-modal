@@ -5,30 +5,21 @@
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "types": "./index.d.ts",
-  "files": [
-    "dist",
-    "lib",
-    "src",
-    "index.d.ts"
-  ],
+  "files": ["dist", "lib", "src", "index.d.ts"],
   "scripts": {
     "clean": "rimraf lib",
-    "lint": "eslint src test",
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "build": "npm run build:lib",
     "build:lib": "babel src --out-dir lib",
-    "prepublishOnly": "npm test && npm run clean && npm run build"
+    "prepublishOnly": "npm test && npm run clean && npm run build",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yesmeck/redux-modal.git"
   },
-  "keywords": [
-    "redux",
-    "react",
-    "modal"
-  ],
+  "keywords": ["redux", "react", "modal"],
   "author": "Wei Zhu <yesmeck@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -39,17 +30,16 @@
     "@types/react": "^16.0.4",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.3.26",
-    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-0": "^6.1.18",
     "babel-register": "^6.3.13",
     "enzyme": "^2.9.1",
-    "eslint": "^4.6.1",
-    "eslint-config-rackt": "^1.1.1",
-    "eslint-plugin-react": "^7.3.0",
+    "husky": "^0.14.3",
     "jest": "^21.0.1",
+    "lint-staged": "^4.1.0",
+    "prettier": "^1.6.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
@@ -67,5 +57,8 @@
     "react": "^0.14.0 || ^15.0.0",
     "react-redux": "^4.0.0 || ^5.0.0",
     "redux": "^3.0.0"
+  },
+  "lint-staged": {
+    "*.{js,json,css}": ["prettier --write", "git add"]
   }
 }

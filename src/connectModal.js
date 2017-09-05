@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import hoistStatics from 'hoist-non-react-statics'
-import { hide, destroy } from './actions'
-import { getDisplayName, isPromise, isUndefined } from './utils'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import hoistStatics from "hoist-non-react-statics";
+import { hide, destroy } from "./actions";
+import { getDisplayName, isPromise, isUndefined } from "./utils";
 
-const INITIAL_MODAL_STATE = {}
+const INITIAL_MODAL_STATE = {};
 
 export default function connectModal({ name, resolve, destroyOnHide = true }) {
   return WrappedComponent => {
@@ -22,67 +22,71 @@ export default function connectModal({ name, resolve, destroyOnHide = true }) {
       };
 
       constructor(props, context) {
-        super(props, context)
+        super(props, context);
 
-        const { modal: { show } } = props
+        const { modal: { show } } = props;
 
-        this.state = { show }
+        this.state = { show };
       }
 
       componentWillReceiveProps(nextProps) {
-        const { modal } = nextProps
-        const { store } = this.context
+        const { modal } = nextProps;
+        const { store } = this.context;
 
         if (isUndefined(modal.show)) {
-          return this.unmount()
+          return this.unmount();
         }
 
         if (!modal.show) {
-          return destroyOnHide ? this.props.destroy(name) : this.hide()
+          return destroyOnHide ? this.props.destroy(name) : this.hide();
         }
 
         if (!resolve) {
-          this.show()
+          this.show();
         }
 
         if (resolve) {
-          const resolveResult = resolve({ store, props: modal.props })
-          if (!isPromise(resolveResult)) { return this.show() }
+          const resolveResult = resolve({ store, props: modal.props });
+          if (!isPromise(resolveResult)) {
+            return this.show();
+          }
           resolveResult.then(() => {
-            this.show()
-          })
+            this.show();
+          });
         }
       }
 
       componentWillUnmount() {
-        this.props.destroy(name)
+        this.props.destroy(name);
       }
 
       show() {
-        this.setState({ show: true })
+        this.setState({ show: true });
       }
 
       hide() {
-        this.setState({ show: false })
+        this.setState({ show: false });
       }
 
       unmount() {
-        this.setState({ show: undefined })
+        this.setState({ show: undefined });
       }
 
       handleHide = () => {
-        this.props.hide(name)
+        this.props.hide(name);
       };
 
       handleDestroy = () => {
-        this.props.destroy(name)
+        this.props.destroy(name);
       };
 
       render() {
-        const { show } = this.state
-        const { modal, hide, destroy, ...ownProps } = this.props
+        const { show } = this.state;
+        const { modal, hide, destroy, ...ownProps } = this.props;
 
-        if (isUndefined(show)) { return null }
+        if (isUndefined(show)) {
+          return null;
+        }
 
         return (
           <WrappedComponent
@@ -92,7 +96,7 @@ export default function connectModal({ name, resolve, destroyOnHide = true }) {
             handleHide={this.handleHide}
             handleDestroy={this.handleDestroy}
           />
-        )
+        );
       }
     }
 
@@ -101,6 +105,6 @@ export default function connectModal({ name, resolve, destroyOnHide = true }) {
         modal: state.modal[name] || INITIAL_MODAL_STATE
       }),
       dispatch => ({ ...bindActionCreators({ hide, destroy }, dispatch) })
-    )(hoistStatics(ConnectModal, WrappedComponent))
-  }
+    )(hoistStatics(ConnectModal, WrappedComponent));
+  };
 }

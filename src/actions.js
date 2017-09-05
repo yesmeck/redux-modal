@@ -1,4 +1,4 @@
-import { SHOW, HIDE, DESTROY } from './actionTypes'
+import { SHOW, HIDE, DESTROY } from "./actionTypes";
 
 export function show(modal, props = {}) {
   return {
@@ -7,7 +7,7 @@ export function show(modal, props = {}) {
       modal,
       props
     }
-  }
+  };
 }
 
 export function hide(modal) {
@@ -16,7 +16,7 @@ export function hide(modal) {
     payload: {
       modal
     }
-  }
+  };
 }
 
 export function destroy(modal) {
@@ -25,5 +25,5 @@ export function destroy(modal) {
     payload: {
       modal
     }
-  }
+  };
 }

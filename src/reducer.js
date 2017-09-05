@@ -1,6 +1,6 @@
-import { SHOW, HIDE, DESTROY } from './actionTypes'
+import { SHOW, HIDE, DESTROY } from "./actionTypes";
 
-const initialState = {}
+const initialState = {};
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -11,7 +11,7 @@ export default (state = initialState, action = {}) => {
           show: true,
           props: action.payload.props
         }
-      }
+      };
     case HIDE:
       return {
         ...state,
@@ -19,13 +19,13 @@ export default (state = initialState, action = {}) => {
           ...state[action.payload.modal],
           show: false
         }
-      }
+      };
     case DESTROY:
       return {
         ...state,
         [action.payload.modal]: undefined
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
