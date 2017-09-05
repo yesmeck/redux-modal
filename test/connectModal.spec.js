@@ -1,4 +1,3 @@
-import expect, { createSpy } from 'expect'
 import { mount } from 'enzyme'
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
@@ -95,7 +94,7 @@ describe('connectModal', () => {
   })
 
   it('destroy modal state before unmount', () => {
-    const mockReducer = createSpy().andReturn({})
+    const mockReducer = jest.fn(() => ({}));
     const finalReducer = combineReducers({ modal: mockReducer })
     const store = createStore(finalReducer)
 
@@ -107,11 +106,7 @@ describe('connectModal', () => {
 
     wrapper.unmount()
 
-    const calls = mockReducer.calls
-    expect(calls[calls.length - 1].arguments).toEqual([
-      {},
-      destroy('myModal')
-    ])
+    expect(mockReducer).toBeCalledWith({}, destroy('myModal'));
   })
 
   it('pass modal state to the given component', () => {
@@ -132,7 +127,7 @@ describe('connectModal', () => {
 
   it('pass handleHide to the given component', () => {
     const initialState = { myModal: { props: {}, show: true } }
-    const mockReducer = createSpy().andReturn(initialState)
+    const mockReducer = jest.fn(() => initialState)
     const finalReducer = combineReducers({ modal: mockReducer })
     const store = createStore(finalReducer)
 
@@ -144,17 +139,16 @@ describe('connectModal', () => {
 
     wrapper.find(MyModal).props().handleHide()
 
-    const calls = mockReducer.calls
-    expect(calls[calls.length - 1].arguments).toEqual([
+    expect(mockReducer).toBeCalledWith(
       initialState,
       hide('myModal')
-    ])
+    )
   })
 
   it('resolve the promise before show', () => {
     const finalReducer = combineReducers({ modal: reducer })
     const store = createStore(finalReducer)
-    const apiCall = createSpy().andReturn(new Promise(resolve => resolve()))
+    const apiCall = jest.fn(() => new Promise(resolve => resolve()))
 
     WrappedMyModal = connectModal({
       name: 'myModal',
@@ -171,7 +165,7 @@ describe('connectModal', () => {
 
     store.dispatch(show('myModal', props))
 
-    expect(apiCall.calls[0].arguments).toEqual([ { store, props } ])
+    expect(apiCall).toBeCalledWith({ store, props })
   })
 
   it('should pass props to wrpped modal', () => {

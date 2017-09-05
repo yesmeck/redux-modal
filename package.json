@@ -14,11 +14,11 @@
   "scripts": {
     "clean": "rimraf lib",
     "lint": "eslint src test",
-    "test": "mocha --compilers js:babel-register --recursive --require ./test/setup.js",
+    "test": "jest",
     "test:watch": "npm test -- --watch",
     "build": "npm run build:lib",
     "build:lib": "babel src --out-dir lib",
-    "prepublish": "npm test && npm run clean && npm run build"
+    "prepublishOnly": "npm test && npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
@@ -49,13 +49,11 @@
     "eslint": "^4.6.1",
     "eslint-config-rackt": "^1.1.1",
     "eslint-plugin-react": "^7.3.0",
-    "expect": "^21.0.0",
-    "jsdom": "^11.2.0",
-    "mocha": "^3.5.0",
+    "jest": "^21.0.1",
     "react": "^15.6.1",
-    "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
+    "react-test-renderer": "^15.6.1",
     "redux": "^3.1.2",
     "rimraf": "^2.5.0",
     "typescript": "^2.4.2",

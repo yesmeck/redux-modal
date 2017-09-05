@@ -1,4 +1,3 @@
-import expect from 'expect'
 import { SHOW, HIDE, DESTROY } from '../src/actionTypes'
 import reducer from '../src/reducer'
 

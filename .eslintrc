@@ -1,5 +1,8 @@
 {
   "extends": "rackt",
+  "env": {
+    "jest": true
+  },
   "rules": {
     "valid-jsdoc": 2,
     // Disable until Flow supports let and const
