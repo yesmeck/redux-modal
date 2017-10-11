@@ -17,7 +17,7 @@ npm i --save redux-modal
 ## Documentation
 
 * [API](/docs/api.md)
-* [Example](/example)
+* [Online demo](https://codesandbox.io/s/github/yesmeck/redux-modal/tree/master/example)
 
 ## License
 
