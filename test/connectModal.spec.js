@@ -91,6 +91,27 @@ describe("connectModal", () => {
     expect(wrapper.html()).toEqual(null);
   });
 
+  it("can mount modal reducer to a custom location in state", () => {
+    const finalReducer = combineReducers({ customModals: reducer });
+    const store = createStore(finalReducer);
+    WrappedMyModal = connectModal({
+      name: "myModal",
+      getModalState: state => state.customModals
+    })(MyModal);
+
+    const wrapper = mount(
+      <ProviderMock store={store}>
+        <WrappedMyModal />
+      </ProviderMock>
+    );
+
+    expect(wrapper.html()).toEqual(null);
+
+    store.dispatch(show("myModal"));
+
+    expect(wrapper.find(MyModal).length).toEqual(1);
+  });
+
   it("destroy modal state before unmount", () => {
     const mockReducer = jest.fn(() => ({}));
     const finalReducer = combineReducers({ modal: mockReducer });

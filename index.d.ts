@@ -20,6 +20,13 @@ interface IModalConfig {
    */
   resolve?: () => any,
   /**
+   * A function that takes the entire Redux state and returns the state slice which
+   * corresponds to where the redux-modal reducer was mounted. Defaults to assuming
+   * that the reducer is mounted under the 'modal' key.
+   * @param {function} getModalState
+   */
+  getModalState?: () => any,
+  /**
    * Weather destroy the modal state and umount the modal after hide, default is true
    * @param {boolean} destroyOnHide
    */

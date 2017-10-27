@@ -10,18 +10,23 @@ Connect a modal component to redux store.
   * `name`(String)(Require) The modal name.
   * `resolve`(Function) Things you want to resolve before show your modal, if return a promise, the modal will show after the promise resolved.
   * `destroyOnHide`(Bool) Whether destroy the modal state and umount the modal after hide, default is true.
+  * `getModalState`(Function) A function that takes the entire Redux state and returns the state slice which corresponds to where the redux-modal reducer was mounted. Defaults to assuming that the reducer is mounted under the 'modal' key.
 
 ### Returns
 
 A React component class that injects modal state and `handleHide` action creator into your modal component.
 
-### Example
+### Examples
 
 ```javascript
 export default connectModal({ name: 'myModal' })(MyModal)
 ```
-
 It will pass the modal state and a `handleHide` and `handleDestroy` action creator as props to your modal component.
+
+If you mounted your modal reducer at some other location such as `modals` instead of `modal` use the `getModalState` config
+```javascript
+export default connectModal({ name: 'myModal', getModalState: (state) => state.modals })(MyModal)
+```
 
 ## reducer
 
