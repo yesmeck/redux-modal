@@ -40,7 +40,12 @@ describe("connectModal", () => {
     }
   }
 
-  let WrappedMyModal = connectModal({ name: "myModal" })(MyModal);
+  const SampleModal = connectModal({ name: "myModal" })(MyModal);
+  let WrappedMyModal = SampleModal;
+
+  afterEach(() => {
+    WrappedMyModal = SampleModal;
+  });
 
   it("render null at first mount", () => {
     const finalReducer = () => ({ modal: {} });
