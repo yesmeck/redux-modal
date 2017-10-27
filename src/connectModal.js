@@ -8,7 +8,12 @@ import { getDisplayName, isPromise, isUndefined } from "./utils";
 
 const INITIAL_MODAL_STATE = {};
 
-export default function connectModal({ name, resolve, destroyOnHide = true }) {
+export default function connectModal({
+  name,
+  getModalState = state => state.modal,
+  resolve,
+  destroyOnHide = true
+}) {
   return WrappedComponent => {
     class ConnectModal extends Component {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
@@ -102,7 +107,7 @@ export default function connectModal({ name, resolve, destroyOnHide = true }) {
 
     return connect(
       state => ({
-        modal: state.modal[name] || INITIAL_MODAL_STATE
+        modal: getModalState(state)[name] || INITIAL_MODAL_STATE
       }),
       dispatch => ({ ...bindActionCreators({ hide, destroy }, dispatch) })
     )(hoistStatics(ConnectModal, WrappedComponent));
