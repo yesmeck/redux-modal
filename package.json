@@ -15,6 +15,9 @@
     "prepublishOnly": "npm test && npm run clean && npm run build",
     "precommit": "lint-staged"
   },
+  "jest": {
+    "setupFiles": ["./test/setup.js"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yesmeck/redux-modal.git"
@@ -35,15 +38,15 @@
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-0": "^6.1.18",
     "babel-register": "^6.3.13",
-    "enzyme": "^2.9.1",
+    "enzyme": "^3.1.1",
+    "enzyme-adapter-react-16": "^1.0.4",
     "husky": "^0.14.3",
     "jest": "^21.0.1",
     "lint-staged": "^4.1.0",
     "prettier": "^1.6.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
-    "react-test-renderer": "^15.6.1",
     "redux": "^3.1.2",
     "rimraf": "^2.5.0",
     "typescript": "^2.4.2",
@@ -54,7 +57,7 @@
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
+    "react": "^0.14.0 || >=15.0.0",
     "react-redux": "^4.0.0 || ^5.0.0",
     "redux": "^3.0.0"
   },

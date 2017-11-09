@@ -1,7 +1,7 @@
-import { mount } from "enzyme";
 import React, { Children, Component } from "react";
 import PropTypes from "prop-types";
 import { createStore, combineReducers } from "redux";
+import { mount } from "enzyme";
 import connectModal from "../src/connectModal";
 import reducer from "../src/reducer";
 import { show, hide, destroy } from "../src/actions";
@@ -73,6 +73,7 @@ describe("connectModal", () => {
     expect(wrapper.html()).toEqual(null);
 
     store.dispatch(show("myModal"));
+    wrapper.update();
 
     expect(wrapper.find(MyModal).length).toEqual(1);
   });
@@ -113,6 +114,7 @@ describe("connectModal", () => {
     expect(wrapper.html()).toEqual(null);
 
     store.dispatch(show("myModal"));
+    wrapper.update();
 
     expect(wrapper.find(MyModal).length).toEqual(1);
   });
