@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Modal } from 'antd'
-import { connectModal } from 'redux-modal'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Modal } from "antd";
+import { connectModal } from "redux-modal";
 
 class AntdModal extends Component {
   static propTypes = {
@@ -10,16 +10,19 @@ class AntdModal extends Component {
   };
 
   render() {
-    const { show, handleHide, message } = this.props
+    const { show, handleHide, message } = this.props;
 
     return (
-      <Modal title="Hello" visible={show} onOk={handleHide} onCancel={handleHide}>
-        <p>
-          { message }
-        </p>
+      <Modal
+        title="Hello"
+        visible={show}
+        onOk={handleHide}
+        onCancel={handleHide}
+      >
+        <p>{message}</p>
       </Modal>
     );
   }
 }
 
-export default connectModal({ name: 'antd', destroyOnHide: true })(AntdModal)
+export default connectModal({ name: "antd", destroyOnHide: true })(AntdModal);
