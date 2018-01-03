@@ -14,7 +14,7 @@ Connect a modal component to redux store.
 
 ### Returns
 
-A React component class that injects modal state and `handleHide` action creator into your modal component.
+A React component class that injects modal state, `handleHide` and `handleDestroy` action creator into your modal component.
 
 ### Examples
 
