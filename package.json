@@ -3,9 +3,8 @@
   "version": "1.7.0",
   "description": "Redux based modal",
   "main": "lib/index.js",
-  "jsnext:main": "src/index.js",
   "types": "./index.d.ts",
-  "files": ["dist", "lib", "src", "index.d.ts"],
+  "files": ["dist", "lib", "index.d.ts"],
   "scripts": {
     "clean": "rimraf lib",
     "test": "jest",
