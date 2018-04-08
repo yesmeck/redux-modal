@@ -25,7 +25,7 @@ interface IModalConfig {
    * that the reducer is mounted under the 'modal' key.
    * @param {function} getModalState
    */
-  getModalState?: () => any,
+  getModalState?: (state: any) => any,
   /**
    * Weather destroy the modal state and umount the modal after hide, default is true
    * @param {boolean} destroyOnHide
