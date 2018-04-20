@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { Action } from "redux";
 
-type ComponentClass = React.ComponentClass;
+type ComponentClass<T> = React.ComponentClass<T>;
 type ComponentType<T> = React.ComponentType<T>;
 
 /**
@@ -89,9 +89,7 @@ export interface IModalInjectedProps {
 }
 
 interface InjectedWrapperComponent {
-    <P extends IModalInjectedProps>(
-        component: ComponentType<P>
-    ): ComponentClass;
+    <P extends IModalInjectedProps>(component: ComponentType<P>): ComponentClass<Exclude<P, IModalInjectedProps>>;
 }
 
 /**
