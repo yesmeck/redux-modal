@@ -3,7 +3,7 @@ node_js:
   - 9
 env:
   matrix:
-  - JOB_TYPE=lint
   - JOB_TYPE=test
+  - JOB_TYPE=build
 script:
   - npm run $JOB_TYPE
