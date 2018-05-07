@@ -4,7 +4,7 @@
   "description": "Redux based modal",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": ["dist", "lib", "index.d.ts"],
+  "files": ["lib", "es"],
   "scripts": {
     "clean": "rimraf lib es",
     "test": "jest",
