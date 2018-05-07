@@ -13,29 +13,29 @@ export type ModalState = any;
  * Signature for modal configuration
  */
 interface IModalConfig {
-    /**
-     * The name of the modal
-     * @param {string} name
-     */
-    name: string;
-    /**
-     * Things you want to resolve before show your modal,
-     * if return a promise, the modal will show after the promise resolved
-     * @param {function} resolve
-     */
-    resolve?: () => any;
-    /**
-     * A function that takes the entire Redux state and returns the state slice which
-     * corresponds to where the redux-modal reducer was mounted. Defaults to assuming
-     * that the reducer is mounted under the 'modal' key.
-     * @param {function} getModalState
-     */
-    getModalState?: (state: any) => ModalState;
-    /**
-     * Weather destroy the modal state and umount the modal after hide, default is true
-     * @param {boolean} destroyOnHide
-     */
-    destroyOnHide?: boolean;
+  /**
+   * The name of the modal
+   * @param {string} name
+   */
+  name: string;
+  /**
+   * Things you want to resolve before show your modal,
+   * if return a promise, the modal will show after the promise resolved
+   * @param {function} resolve
+   */
+  resolve?: () => any;
+  /**
+   * A function that takes the entire Redux state and returns the state slice which
+   * corresponds to where the redux-modal reducer was mounted. Defaults to assuming
+   * that the reducer is mounted under the 'modal' key.
+   * @param {function} getModalState
+   */
+  getModalState?: (state: any) => ModalState;
+  /**
+   * Weather destroy the modal state and umount the modal after hide, default is true
+   * @param {boolean} destroyOnHide
+   */
+  destroyOnHide?: boolean;
 }
 
 /**
@@ -73,25 +73,25 @@ export function reducer(state: ModalState, action: Action): ModalState;
  * decorator.
  */
 export interface IModalInjectedProps {
-    /**
-     * Boolean flag indicating whether the modal is showing or not
-     *
-     * @type {boolean}
-     * @memberof IModalInjectedProps
-     */
-    show: boolean;
-    /**
-     * Function that hides the component when called
-     *
-     * @memberof IModalInjectedProps
-     */
-    handleHide: () => void;
+  /**
+   * Boolean flag indicating whether the modal is showing or not
+   *
+   * @type {boolean}
+   * @memberof IModalInjectedProps
+   */
+  show: boolean;
+  /**
+   * Function that hides the component when called
+   *
+   * @memberof IModalInjectedProps
+   */
+  handleHide: () => void;
 }
 
 interface InjectedWrapperComponent {
-    <P extends IModalInjectedProps>(
-        component: ComponentType<P>
-    ): ComponentClass;
+  <P extends IModalInjectedProps>(
+      component: ComponentType<P>
+  ): ComponentClass;
 }
 
 /**
