@@ -1,8 +1,9 @@
 import { SHOW, HIDE, DESTROY } from "./actionTypes";
+import { ReduxModalState } from "./interface";
 
 const initialState = {};
 
-export default (state = initialState, action = {}) => {
+export default (state: ReduxModalState = initialState, action: any = {}) => {
   switch (action.type) {
     case SHOW:
       return {

@@ -1,10 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import * as PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import hoistStatics from "hoist-non-react-statics";
 import { hide, destroy } from "./actions";
 import { getDisplayName, isPromise, isUndefined } from "./utils";
+import { ModalConfig, InjectedWrapperComponent, ConnectModalState, ConnectModalProps, ReduxContext } from './interface';
+
+const hoistStatics = require("hoist-non-react-statics");
 
 const INITIAL_MODAL_STATE = {};
 
@@ -13,9 +15,9 @@ export default function connectModal({
   getModalState = state => state.modal,
   resolve,
   destroyOnHide = true
-}) {
+}: ModalConfig): InjectedWrapperComponent {
   return WrappedComponent => {
-    class ConnectModal extends Component {
+    class ConnectModal extends React.Component<ConnectModalProps, ConnectModalState> {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
 
       static propTypes = {
@@ -26,7 +28,7 @@ export default function connectModal({
         store: PropTypes.object.isRequired
       };
 
-      constructor(props, context) {
+      constructor(props: ConnectModalProps, context: ReduxContext) {
         super(props, context);
 
         const { modal: { show } } = props;
@@ -34,7 +36,7 @@ export default function connectModal({
         this.state = { show };
       }
 
-      componentWillReceiveProps(nextProps) {
+      componentWillReceiveProps(nextProps: ConnectModalProps) {
         const { modal } = nextProps;
         const { store } = this.context;
 
@@ -93,14 +95,14 @@ export default function connectModal({
           return null;
         }
 
-        return (
-          <WrappedComponent
-            {...ownProps}
-            {...modal.props}
-            show={show}
-            handleHide={this.handleHide}
-            handleDestroy={this.handleDestroy}
-          />
+        return React.createElement(WrappedComponent,
+          {
+            ...ownProps,
+            ...modal.props,
+            show,
+            handleHide: this.handleHide,
+            handleDestroy: this.handleDestroy,
+          }
         );
       }
     }

@@ -1,6 +1,6 @@
 import { SHOW, HIDE, DESTROY } from "./actionTypes";
 
-export function show(modal, props = {}) {
+export function show(modal: string, props = {}) {
   return {
     type: SHOW,
     payload: {
@@ -10,7 +10,7 @@ export function show(modal, props = {}) {
   };
 }
 
-export function hide(modal) {
+export function hide(modal: string) {
   return {
     type: HIDE,
     payload: {
@@ -19,7 +19,7 @@ export function hide(modal) {
   };
 }
 
-export function destroy(modal) {
+export function destroy(modal: string) {
   return {
     type: DESTROY,
     payload: {

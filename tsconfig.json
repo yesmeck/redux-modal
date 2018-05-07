@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "lib": ["es6"],
+    "declaration": true,
+    "outDir": "lib"
+  },
+  "exclude": ["test", "lib", "es", "node_modules"]
+}

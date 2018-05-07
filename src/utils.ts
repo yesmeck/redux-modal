@@ -1,8 +1,8 @@
-export function getDisplayName(WrappedComponent) {
+export function getDisplayName(WrappedComponent: React.ComponentType<any>) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
 }
 
-export function isPromise(thing) {
+export function isPromise(thing: any) {
   try {
     return typeof thing.then === "function";
   } catch (e) {
@@ -10,6 +10,6 @@ export function isPromise(thing) {
   }
 }
 
-export function isUndefined(thing) {
+export function isUndefined(thing: any) {
   return typeof thing === "undefined";
 }

@@ -3,19 +3,26 @@
   "version": "1.7.3",
   "description": "Redux based modal",
   "main": "lib/index.js",
-  "types": "./index.d.ts",
+  "module": "es/index.js",
   "files": ["dist", "lib", "index.d.ts"],
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf lib es",
     "test": "jest",
     "test:watch": "npm test -- --watch",
-    "build": "npm run build:lib",
-    "build:lib": "babel src --out-dir lib",
-    "prepublishOnly": "npm test && npm run clean && npm run build",
+    "prebuild": "npm run clean",
+    "build": "npm run build:lib && npm run build:es",
+    "build:lib": "tsc",
+    "build:es": "tsc --module es6 --outDir es",
+    "prepublishOnly": "npm test && npm run build",
     "precommit": "lint-staged"
   },
   "jest": {
-    "setupFiles": ["./test/setup.js"]
+    "setupFiles": ["./test/setup.js"],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   },
   "repository": {
     "type": "git",
@@ -29,14 +36,11 @@
   },
   "homepage": "https://github.com/yesmeck/redux-modal#readme",
   "devDependencies": {
+    "@types/enzyme": "^3.1.10",
+    "@types/jest": "^22.2.3",
+    "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.4",
-    "babel-cli": "^6.4.5",
-    "babel-core": "^6.3.26",
-    "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-react": "^6.1.18",
-    "babel-preset-stage-0": "^6.1.18",
-    "babel-register": "^6.3.13",
+    "@types/react-redux": "^5.0.19",
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
     "husky": "^0.14.3",
@@ -48,8 +52,8 @@
     "react-redux": "^5.0.6",
     "redux": "^3.1.2",
     "rimraf": "^2.5.0",
-    "typescript": "^2.4.2",
-    "typescript-definition-tester": "^0.0.5"
+    "ts-jest": "^22.4.5",
+    "typescript": "^2.8.0"
   },
   "dependencies": {
     "hoist-non-react-statics": "^2.3.1",

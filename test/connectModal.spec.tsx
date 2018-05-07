@@ -1,13 +1,18 @@
-import React, { Children, Component } from "react";
-import PropTypes from "prop-types";
-import { createStore, combineReducers } from "redux";
+import * as React from "react";
+import * as PropTypes from "prop-types";
+import { createStore, combineReducers, Store } from "redux";
 import { mount } from "enzyme";
 import connectModal from "../src/connectModal";
 import reducer from "../src/reducer";
 import { show, hide, destroy } from "../src/actions";
+import { InjectedProps } from '../src/interface';
 
 describe("connectModal", () => {
-  class ProviderMock extends Component {
+  interface ProviderMockProps {
+    store: Store<any>,
+  }
+
+  class ProviderMock extends React.Component<ProviderMockProps> {
     static childContextTypes = {
       store: PropTypes.object.isRequired
     };
@@ -17,11 +22,11 @@ describe("connectModal", () => {
     }
 
     render() {
-      return Children.only(this.props.children);
+      return React.Children.only(this.props.children);
     }
   }
 
-  class Modal extends Component {
+  class Modal extends React.Component<{ show: boolean }> {
     static propTypes = {
       show: PropTypes.bool.isRequired
     };
@@ -32,7 +37,11 @@ describe("connectModal", () => {
     }
   }
 
-  class MyModal extends Component {
+  interface MyModalProps extends InjectedProps {
+    hello?: string;
+  }
+
+  class MyModal extends React.Component<MyModalProps> {
     render() {
       const { show } = this.props;
 
@@ -194,7 +203,7 @@ describe("connectModal", () => {
     expect(apiCall).toBeCalledWith({ store, props });
   });
 
-  it("should pass props to wrpped modal", () => {
+  it("should pass props to wrapped modal", () => {
     const finalReducer = combineReducers({
       modal: () => ({ myModal: { show: true, props: {} } })
     });
