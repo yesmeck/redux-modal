@@ -8,7 +8,7 @@
 
 It works with any react based modal component.
 
-* [Online demo](https://codesandbox.io/s/github/yesmeck/redux-modal/tree/master/example)
+[Live demo](https://codesandbox.io/s/github/yesmeck/redux-modal/tree/master/example)
 
 ## Installation
 
