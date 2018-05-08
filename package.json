@@ -14,7 +14,8 @@
     "build:lib": "tsc",
     "build:es": "tsc --module es6 --outDir es",
     "prepublishOnly": "npm test && npm run build",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "release": "release-it"
   },
   "jest": {
     "setupFiles": ["./test/setup.js"],
@@ -51,6 +52,7 @@
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "redux": "^4.0.0",
+    "release-it": "^7.4.3",
     "rimraf": "^2.5.0",
     "ts-jest": "^22.4.5",
     "typescript": "^2.8.0"
