@@ -4,7 +4,10 @@
   "description": "Redux based modal",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": ["lib", "es"],
+  "files": [
+    "lib",
+    "es"
+  ],
   "scripts": {
     "clean": "rimraf lib es",
     "test": "jest",
@@ -18,18 +21,31 @@
     "release": "release-it"
   },
   "jest": {
-    "setupFiles": ["./test/setup.js"],
+    "setupFiles": [
+      "./test/setup.js"
+    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yesmeck/redux-modal.git"
   },
-  "keywords": ["redux", "react", "modal"],
+  "keywords": [
+    "redux",
+    "react",
+    "modal"
+  ],
   "author": "Wei Zhu <yesmeck@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -67,6 +83,9 @@
     "redux": "^3.0.0 || ^4.0.0"
   },
   "lint-staged": {
-    "*.{js,json,css}": ["prettier --write", "git add"]
+    "*.{js,ts,tsx,css}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

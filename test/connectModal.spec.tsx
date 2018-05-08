@@ -1,20 +1,20 @@
-import * as React from "react";
-import * as PropTypes from "prop-types";
-import { createStore, combineReducers, Store } from "redux";
-import { mount } from "enzyme";
-import connectModal from "../src/connectModal";
-import reducer from "../src/reducer";
-import { show, hide, destroy } from "../src/actions";
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { createStore, combineReducers, Store } from 'redux';
+import { mount } from 'enzyme';
+import connectModal from '../src/connectModal';
+import reducer from '../src/reducer';
+import { show, hide, destroy } from '../src/actions';
 import { InjectedProps } from '../src/interface';
 
-describe("connectModal", () => {
+describe('connectModal', () => {
   interface ProviderMockProps {
-    store: Store<any>,
+    store: Store<any>;
   }
 
   class ProviderMock extends React.Component<ProviderMockProps> {
     static childContextTypes = {
-      store: PropTypes.object.isRequired
+      store: PropTypes.object.isRequired,
     };
 
     getChildContext() {
@@ -28,7 +28,7 @@ describe("connectModal", () => {
 
   class Modal extends React.Component<{ show: boolean }> {
     static propTypes = {
-      show: PropTypes.bool.isRequired
+      show: PropTypes.bool.isRequired,
     };
 
     render() {
@@ -49,14 +49,14 @@ describe("connectModal", () => {
     }
   }
 
-  const SampleModal = connectModal({ name: "myModal" })(MyModal);
+  const SampleModal = connectModal({ name: 'myModal' })(MyModal);
   let WrappedMyModal = SampleModal;
 
   afterEach(() => {
     WrappedMyModal = SampleModal;
   });
 
-  it("render null at first mount", () => {
+  it('render null at first mount', () => {
     const finalReducer = () => ({ modal: {} });
     const store = createStore(finalReducer);
 
@@ -69,7 +69,7 @@ describe("connectModal", () => {
     expect(wrapper.html()).toEqual(null);
   });
 
-  it("mount modal after dispatch show action", () => {
+  it('mount modal after dispatch show action', () => {
     const finalReducer = combineReducers({ modal: reducer });
     const store = createStore(finalReducer);
 
@@ -81,16 +81,16 @@ describe("connectModal", () => {
 
     expect(wrapper.html()).toEqual(null);
 
-    store.dispatch(show("myModal"));
+    store.dispatch(show('myModal'));
     wrapper.update();
 
     expect(wrapper.find(MyModal).length).toEqual(1);
   });
 
-  it("destroy after dispatch hide action if destroyOnHide is true", () => {
+  it('destroy after dispatch hide action if destroyOnHide is true', () => {
     const finalReducer = combineReducers({ modal: reducer });
     const store = createStore(finalReducer);
-    WrappedMyModal = connectModal({ name: "myModal", destroyOnHide: true })(
+    WrappedMyModal = connectModal({ name: 'myModal', destroyOnHide: true })(
       MyModal
     );
 
@@ -100,18 +100,18 @@ describe("connectModal", () => {
       </ProviderMock>
     );
 
-    store.dispatch(show("myModal"));
-    store.dispatch(hide("myModal"));
+    store.dispatch(show('myModal'));
+    store.dispatch(hide('myModal'));
 
     expect(wrapper.html()).toEqual(null);
   });
 
-  it("can mount modal reducer to a custom location in state", () => {
+  it('can mount modal reducer to a custom location in state', () => {
     const finalReducer = combineReducers({ customModals: reducer });
     const store = createStore(finalReducer);
     WrappedMyModal = connectModal({
-      name: "myModal",
-      getModalState: state => state.customModals
+      name: 'myModal',
+      getModalState: state => state.customModals,
     })(MyModal);
 
     const wrapper = mount(
@@ -122,13 +122,13 @@ describe("connectModal", () => {
 
     expect(wrapper.html()).toEqual(null);
 
-    store.dispatch(show("myModal"));
+    store.dispatch(show('myModal'));
     wrapper.update();
 
     expect(wrapper.find(MyModal).length).toEqual(1);
   });
 
-  it("destroy modal state before unmount", () => {
+  it('destroy modal state before unmount', () => {
     const mockReducer = jest.fn(() => ({}));
     const finalReducer = combineReducers({ modal: mockReducer });
     const store = createStore(finalReducer);
@@ -141,12 +141,12 @@ describe("connectModal", () => {
 
     wrapper.unmount();
 
-    expect(mockReducer).toBeCalledWith({}, destroy("myModal"));
+    expect(mockReducer).toBeCalledWith({}, destroy('myModal'));
   });
 
-  it("pass modal state to the given component", () => {
+  it('pass modal state to the given component', () => {
     const finalReducer = combineReducers({
-      modal: () => ({ myModal: { show: true, props: {} } })
+      modal: () => ({ myModal: { show: true, props: {} } }),
     });
 
     const store = createStore(finalReducer);
@@ -160,7 +160,7 @@ describe("connectModal", () => {
     expect(wrapper.find(MyModal).props().show).toEqual(true);
   });
 
-  it("pass handleHide to the given component", () => {
+  it('pass handleHide to the given component', () => {
     const initialState = { myModal: { props: {}, show: true } };
     const mockReducer = jest.fn(() => initialState);
     const finalReducer = combineReducers({ modal: mockReducer });
@@ -177,17 +177,17 @@ describe("connectModal", () => {
       .props()
       .handleHide();
 
-    expect(mockReducer).toBeCalledWith(initialState, hide("myModal"));
+    expect(mockReducer).toBeCalledWith(initialState, hide('myModal'));
   });
 
-  it("resolve the promise before show", () => {
+  it('resolve the promise before show', () => {
     const finalReducer = combineReducers({ modal: reducer });
     const store = createStore(finalReducer);
     const apiCall = jest.fn(() => new Promise(resolve => resolve()));
 
     WrappedMyModal = connectModal({
-      name: "myModal",
-      resolve: apiCall
+      name: 'myModal',
+      resolve: apiCall,
     })(MyModal);
 
     mount(
@@ -196,20 +196,20 @@ describe("connectModal", () => {
       </ProviderMock>
     );
 
-    const props = { hello: "Ava" };
+    const props = { hello: 'Ava' };
 
-    store.dispatch(show("myModal", props));
+    store.dispatch(show('myModal', props));
 
     expect(apiCall).toBeCalledWith({ store, props });
   });
 
-  it("should pass props to wrapped modal", () => {
+  it('should pass props to wrapped modal', () => {
     const finalReducer = combineReducers({
-      modal: () => ({ myModal: { show: true, props: {} } })
+      modal: () => ({ myModal: { show: true, props: {} } }),
     });
     const store = createStore(finalReducer);
 
-    WrappedMyModal = connectModal({ name: "myModal" })(MyModal);
+    WrappedMyModal = connectModal({ name: 'myModal' })(MyModal);
 
     const wrapper = mount(
       <ProviderMock store={store}>
@@ -217,6 +217,6 @@ describe("connectModal", () => {
       </ProviderMock>
     );
 
-    expect(wrapper.find(MyModal).props().hello).toEqual("ava");
+    expect(wrapper.find(MyModal).props().hello).toEqual('ava');
   });
 });

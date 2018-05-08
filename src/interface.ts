@@ -1,4 +1,4 @@
-import { Action, Store } from "redux";
+import { Action, Store } from 'redux';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -8,15 +8,15 @@ export interface ReduxContext {
 
 export interface ModalAction extends Action {
   payload?: {
-    modal: string,
-    props?: any,
-  }
+    modal: string;
+    props?: any;
+  };
 }
 
 export type ReduxModalState = {
   [name: string]: ModalState;
-}
- 
+};
+
 export type ModalState = {
   show?: boolean;
   props?: any;
@@ -53,6 +53,6 @@ export interface ConnectModalState {
 
 export interface InjectedWrapperComponent {
   <P extends InjectedProps>(
-    component: React.ComponentType<P>,
+    component: React.ComponentType<P>
   ): React.ComponentClass<Omit<P, keyof InjectedProps> & any>;
 }

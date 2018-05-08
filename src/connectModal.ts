@@ -1,12 +1,18 @@
-import * as React from "react";
-import * as PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { hide, destroy } from "./actions";
-import { getDisplayName, isPromise, isUndefined } from "./utils";
-import { ModalConfig, InjectedWrapperComponent, ConnectModalState, ConnectModalProps, ReduxContext } from './interface';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { hide, destroy } from './actions';
+import { getDisplayName, isPromise, isUndefined } from './utils';
+import {
+  ModalConfig,
+  InjectedWrapperComponent,
+  ConnectModalState,
+  ConnectModalProps,
+  ReduxContext,
+} from './interface';
 
-const hoistStatics = require("hoist-non-react-statics");
+const hoistStatics = require('hoist-non-react-statics');
 
 const INITIAL_MODAL_STATE = {};
 
@@ -14,24 +20,29 @@ export default function connectModal({
   name,
   getModalState = state => state.modal,
   resolve,
-  destroyOnHide = true
+  destroyOnHide = true,
 }: ModalConfig): InjectedWrapperComponent {
   return WrappedComponent => {
-    class ConnectModal extends React.Component<ConnectModalProps, ConnectModalState> {
+    class ConnectModal extends React.Component<
+      ConnectModalProps,
+      ConnectModalState
+    > {
       static displayName = `ConnectModal(${getDisplayName(WrappedComponent)})`;
 
       static propTypes = {
-        modal: PropTypes.object.isRequired
+        modal: PropTypes.object.isRequired,
       };
 
       static contextTypes = {
-        store: PropTypes.object.isRequired
+        store: PropTypes.object.isRequired,
       };
 
       constructor(props: ConnectModalProps, context: ReduxContext) {
         super(props, context);
 
-        const { modal: { show } } = props;
+        const {
+          modal: { show },
+        } = props;
 
         this.state = { show };
       }
@@ -95,21 +106,19 @@ export default function connectModal({
           return null;
         }
 
-        return React.createElement(WrappedComponent,
-          {
-            ...ownProps,
-            ...modal.props,
-            show,
-            handleHide: this.handleHide,
-            handleDestroy: this.handleDestroy,
-          }
-        );
+        return React.createElement(WrappedComponent, {
+          ...ownProps,
+          ...modal.props,
+          show,
+          handleHide: this.handleHide,
+          handleDestroy: this.handleDestroy,
+        });
       }
     }
 
     return connect(
       state => ({
-        modal: getModalState(state)[name] || INITIAL_MODAL_STATE
+        modal: getModalState(state)[name] || INITIAL_MODAL_STATE,
       }),
       dispatch => ({ ...bindActionCreators({ hide, destroy }, dispatch) })
     )(hoistStatics(ConnectModal, WrappedComponent));

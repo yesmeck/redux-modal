@@ -1,12 +1,12 @@
-import { SHOW, HIDE, DESTROY } from "./actionTypes";
+import { SHOW, HIDE, DESTROY } from './actionTypes';
 
 export function show(modal: string, props = {}) {
   return {
     type: SHOW,
     payload: {
       modal,
-      props
-    }
+      props,
+    },
   };
 }
 
@@ -14,8 +14,8 @@ export function hide(modal: string) {
   return {
     type: HIDE,
     payload: {
-      modal
-    }
+      modal,
+    },
   };
 }
 
@@ -23,7 +23,7 @@ export function destroy(modal: string) {
   return {
     type: DESTROY,
     payload: {
-      modal
-    }
+      modal,
+    },
   };
 }
