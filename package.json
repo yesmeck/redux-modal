@@ -19,7 +19,7 @@
     "build:es": "tsc --module es6 --outDir es",
     "prepublishOnly": "npm test && npm run build",
     "precommit": "lint-staged",
-    "release": "release-it --github.release"
+    "release": "release-it --verbose --github.release"
   },
   "jest": {
     "setupFiles": [
