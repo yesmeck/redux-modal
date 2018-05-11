@@ -6000,9 +6000,9 @@ redux-logger@^3.0.6:
   dependencies:
     deep-diff "^0.3.5"
 
-redux-modal@^1.5.2:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/redux-modal/-/redux-modal-1.7.0.tgz#423551dcf2eafae5e739952211be490647df3e92"
+redux-modal@^2.0.1:
+  version "2.0.1"
+  resolved "http://registry.npm.alibaba-inc.com/redux-modal/download/redux-modal-2.0.1.tgz#dfd214b1868410e4d9c7c6499f4922296c6c2478"
   dependencies:
     hoist-non-react-statics "^2.3.1"
     prop-types "^15.5.10"
