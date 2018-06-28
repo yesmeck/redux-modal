@@ -9,7 +9,6 @@ import {
   InjectedWrapperComponent,
   ConnectModalState,
   ConnectModalProps,
-  ReduxContext,
 } from './interface';
 
 const hoistStatics = require('hoist-non-react-statics');
@@ -37,15 +36,9 @@ export default function connectModal({
         store: PropTypes.object.isRequired,
       };
 
-      constructor(props: ConnectModalProps, context: ReduxContext) {
-        super(props, context);
-
-        const {
-          modal: { show },
-        } = props;
-
-        this.state = { show };
-      }
+      state = {
+        show: this.props.modal.show,
+      };
 
       componentWillReceiveProps(nextProps: ConnectModalProps) {
         const { modal } = nextProps;
