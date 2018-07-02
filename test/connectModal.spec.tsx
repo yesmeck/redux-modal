@@ -219,4 +219,42 @@ describe('connectModal', () => {
 
     expect(wrapper.find(MyModal).props().hello).toEqual('ava');
   });
+
+  it('should allow mapStateToProps as second parameter', () => {
+    const finalReducer = combineReducers({
+      modal: () => ({ myModal: { show: true, props: {} } }),
+      test: () => ({ test: 'test' }),
+    });
+    const store = createStore(finalReducer);
+
+    WrappedMyModal = connectModal({ name: 'myModal' }, state => ({
+      test: state.test.test,
+    }))(MyModal);
+
+    const wrapper = mount(
+      <ProviderMock store={store}>
+        <WrappedMyModal />
+      </ProviderMock>
+    );
+    expect(wrapper.find(MyModal).props().test).toEqual('test');
+  });
+
+  it('should allow mapDispatchToProps as third parameter', () => {
+    const finalReducer = combineReducers({
+      modal: () => ({ myModal: { show: true, props: {} } }),
+      test: () => ({ test: 'test' }),
+    });
+    const store = createStore(finalReducer);
+
+    WrappedMyModal = connectModal({ name: 'myModal' }, null, dispatch => ({
+      test: 'test',
+    }))(MyModal);
+
+    const wrapper = mount(
+      <ProviderMock store={store}>
+        <WrappedMyModal />
+      </ProviderMock>
+    );
+    expect(wrapper.find(MyModal).props().test).toEqual('test');
+  });
 });
