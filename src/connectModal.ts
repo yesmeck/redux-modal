@@ -15,12 +15,16 @@ const hoistStatics = require('hoist-non-react-statics');
 
 const INITIAL_MODAL_STATE = {};
 
-export default function connectModal({
-  name,
-  getModalState = state => state.modal,
-  resolve,
-  destroyOnHide = true,
-}: ModalConfig): InjectedWrapperComponent {
+export default function connectModal(
+  {
+    name,
+    getModalState = state => state.modal,
+    resolve,
+    destroyOnHide = true,
+  }: ModalConfig,
+  mapStateToProps?: any,
+  mapDispatchToProps?: any
+): InjectedWrapperComponent {
   return WrappedComponent => {
     class ConnectModal extends React.Component<
       ConnectModalProps,
@@ -108,12 +112,15 @@ export default function connectModal({
         });
       }
     }
-
     return connect(
       state => ({
         modal: getModalState(state)[name] || INITIAL_MODAL_STATE,
+        ...(!mapStateToProps ? {} : mapStateToProps(state)),
       }),
-      dispatch => ({ ...bindActionCreators({ hide, destroy }, dispatch) })
+      dispatch => ({
+        ...bindActionCreators({ hide, destroy }, dispatch),
+        ...(!mapDispatchToProps ? {} : mapDispatchToProps(dispatch)),
+      })
     )(hoistStatics(ConnectModal, WrappedComponent));
   };
 }
