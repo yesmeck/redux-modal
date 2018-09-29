@@ -22,10 +22,9 @@ export default (state: ReduxModalState = initialState, action: any = {}) => {
         },
       };
     case DESTROY:
-      return {
-        ...state,
-        [action.payload.modal]: undefined,
-      };
+      const nextState = { ...state };
+      delete nextState[action.payload.modal];
+      return nextState;
     default:
       return state;
   }
