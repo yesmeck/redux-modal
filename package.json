@@ -59,7 +59,7 @@
     "@types/jest": "^23.0.0",
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.4",
-    "@types/react-redux": "^6.0.0",
+    "@types/react-redux": "6.0.10",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.4.0",
     "husky": "^1.0.0",
