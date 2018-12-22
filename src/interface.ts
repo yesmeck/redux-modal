@@ -18,6 +18,7 @@ export type ReduxModalState = {
 };
 
 export type ModalState = {
+  [key: string]: any;
   show?: boolean;
   props?: any;
 };
