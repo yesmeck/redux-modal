@@ -1,31 +1,14 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { createStore, combineReducers, Store } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { mount } from 'enzyme';
 import connectModal from '../src/connectModal';
 import reducer from '../src/reducer';
 import { show, hide, destroy } from '../src/actions';
 import { InjectedProps } from '../src/interface';
+import { Provider } from 'react-redux';
 
 describe('connectModal', () => {
-  interface ProviderMockProps {
-    store: Store<any>;
-  }
-
-  class ProviderMock extends React.Component<ProviderMockProps> {
-    static childContextTypes = {
-      store: PropTypes.object.isRequired,
-    };
-
-    getChildContext() {
-      return { store: this.props.store };
-    }
-
-    render() {
-      return React.Children.only(this.props.children);
-    }
-  }
-
   class Modal extends React.Component<{ show: boolean }> {
     static propTypes = {
       show: PropTypes.bool.isRequired,
@@ -61,9 +44,9 @@ describe('connectModal', () => {
     const store = createStore(finalReducer);
 
     const wrapper = mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal />
-      </ProviderMock>
+      </Provider>
     );
 
     expect(wrapper.html()).toEqual(null);
@@ -74,9 +57,9 @@ describe('connectModal', () => {
     const store = createStore(finalReducer);
 
     const wrapper = mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal />
-      </ProviderMock>
+      </Provider>
     );
 
     expect(wrapper.html()).toEqual(null);
@@ -95,9 +78,9 @@ describe('connectModal', () => {
     );
 
     const wrapper = mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal />
-      </ProviderMock>
+      </Provider>
     );
 
     store.dispatch(show('myModal'));
@@ -115,9 +98,9 @@ describe('connectModal', () => {
     })(MyModal);
 
     const wrapper = mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal />
-      </ProviderMock>
+      </Provider>
     );
 
     expect(wrapper.html()).toEqual(null);
@@ -134,9 +117,9 @@ describe('connectModal', () => {
     const store = createStore(finalReducer);
 
     const wrapper = mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal />
-      </ProviderMock>
+      </Provider>
     );
 
     wrapper.unmount();
@@ -152,9 +135,9 @@ describe('connectModal', () => {
     const store = createStore(finalReducer);
 
     const wrapper = mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal />
-      </ProviderMock>
+      </Provider>
     );
 
     expect(wrapper.find(MyModal).props().show).toEqual(true);
@@ -167,9 +150,9 @@ describe('connectModal', () => {
     const store = createStore(finalReducer);
 
     const wrapper = mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal />
-      </ProviderMock>
+      </Provider>
     );
 
     wrapper
@@ -191,16 +174,16 @@ describe('connectModal', () => {
     })(MyModal);
 
     mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal />
-      </ProviderMock>
+      </Provider>
     );
 
     const props = { hello: 'Ava' };
 
     store.dispatch(show('myModal', props));
 
-    expect(apiCall).toBeCalledWith({ store, props });
+    expect(apiCall).toBeCalledWith({ props });
   });
 
   it('should pass props to wrapped modal', () => {
@@ -212,9 +195,9 @@ describe('connectModal', () => {
     WrappedMyModal = connectModal({ name: 'myModal' })(MyModal);
 
     const wrapper = mount(
-      <ProviderMock store={store}>
+      <Provider store={store}>
         <WrappedMyModal hello="ava" />
-      </ProviderMock>
+      </Provider>
     );
 
     expect(wrapper.find(MyModal).props().hello).toEqual('ava');

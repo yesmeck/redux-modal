@@ -32,17 +32,12 @@ export default function connectModal({
         modal: PropTypes.object.isRequired,
       };
 
-      static contextTypes = {
-        store: PropTypes.object.isRequired,
-      };
-
       state = {
         show: this.props.modal.show,
       };
 
       componentWillReceiveProps(nextProps: ConnectModalProps) {
         const { modal } = nextProps;
-        const { store } = this.context;
 
         if (isUndefined(modal.show)) {
           return this.unmount();
@@ -57,7 +52,7 @@ export default function connectModal({
         }
 
         if (resolve) {
-          const resolveResult = resolve({ store, props: modal.props });
+          const resolveResult = resolve({ props: modal.props });
           if (!isPromise(resolveResult)) {
             return this.show();
           }
