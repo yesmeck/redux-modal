@@ -22,14 +22,13 @@ export type ModalState = {
   props?: any;
 };
 
-export interface ResolveParamter {
-  store: Store<any>;
+export interface ResolveParameter {
   props: any;
 }
 
 export interface ModalConfig {
   name: string;
-  resolve?: (parameter: ResolveParamter) => any;
+  resolve?: (parameter: ResolveParameter) => any;
   getModalState?: (state: any) => ModalState;
   destroyOnHide?: boolean;
 }
