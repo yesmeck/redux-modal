@@ -36,8 +36,12 @@ export default function connectModal({
         show: this.props.modal.show,
       };
 
-      componentWillReceiveProps(nextProps: ConnectModalProps) {
-        const { modal } = nextProps;
+      componentDidUpdate(prevProps: ConnectModalProps) {
+        const { modal } = this.props;
+
+        if (prevProps.modal.show === modal.show) {
+          return;
+        }
 
         if (isUndefined(modal.show)) {
           return this.unmount();
