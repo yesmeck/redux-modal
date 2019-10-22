@@ -1,6 +1,6 @@
 {
   "name": "redux-modal",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "description": "Redux based modal",
   "main": "lib/index.js",
   "module": "es/index.js",
