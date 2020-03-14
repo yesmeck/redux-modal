@@ -62,7 +62,7 @@ export default combineReducers({
 })
 ```
 
-## show(name, props)
+## show(name, props) | show<T>(name, props: T)
 
 The show modal action creator.
 
@@ -70,6 +70,14 @@ The show modal action creator.
 
 * `name`(String) The name of modal to show.
 * `props`(Object) Props pass to your modal.
+
+### Example
+
+```javascript
+import { MyModalProps } from '...'
+
+show<MyModalProps>('modalName', {prop1: 'example'})
+```
 
 ## hide(name)
 

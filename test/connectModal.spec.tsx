@@ -39,6 +39,10 @@ describe('connectModal', () => {
     WrappedMyModal = SampleModal;
   });
 
+  it('works correctly with generic', () => {
+    show<{ test: boolean }>('myModal', { test: true });
+  });
+
   it('render null at first mount', () => {
     const finalReducer = () => ({ modal: {} });
     const store = createStore(finalReducer);

@@ -1,11 +1,11 @@
 import { SHOW, HIDE, DESTROY } from './actionTypes';
 
-export function show(modal: string, props = {}) {
+export function show<T = {}>(modal: string, props?: T) {
   return {
     type: SHOW,
     payload: {
       modal,
-      props,
+      props: props || {},
     },
   };
 }
