@@ -53,7 +53,7 @@ describe('connectModal', () => {
       </Provider>
     );
 
-    expect(wrapper.html()).toEqual('');
+    expect(wrapper.html()).toEqual(null);
   });
 
   it('mount modal after dispatch show action', () => {
@@ -66,7 +66,7 @@ describe('connectModal', () => {
       </Provider>
     );
 
-    expect(wrapper.html()).toEqual('');
+    expect(wrapper.html()).toEqual(null);
 
     store.dispatch(show('myModal'));
     wrapper.update();
@@ -90,7 +90,7 @@ describe('connectModal', () => {
     store.dispatch(show('myModal'));
     store.dispatch(hide('myModal'));
 
-    expect(wrapper.html()).toEqual('');
+    expect(wrapper.html()).toEqual(null);
   });
 
   it('can mount modal reducer to a custom location in state', () => {
@@ -107,7 +107,7 @@ describe('connectModal', () => {
       </Provider>
     );
 
-    expect(wrapper.html()).toEqual('');
+    expect(wrapper.html()).toEqual(null);
 
     store.dispatch(show('myModal'));
     wrapper.update();
